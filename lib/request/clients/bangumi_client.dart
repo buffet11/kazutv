@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:kazumi/request/config/api_endpoints.dart';
-import 'package:kazumi/request/core/dio_factory.dart';
-import 'package:kazumi/request/core/network_error_mapper.dart';
-import 'package:kazumi/services/network/bangumi_acceleration.dart';
-import 'package:kazumi/services/storage/storage.dart';
-import 'package:kazumi/utils/bangumi_mirror_credentials.dart';
-import 'package:kazumi/utils/constants.dart';
-import 'package:kazumi/utils/crypto.dart';
+import 'package:kazutv/request/config/api_endpoints.dart';
+import 'package:kazutv/request/core/dio_factory.dart';
+import 'package:kazutv/request/core/network_error_mapper.dart';
+import 'package:kazutv/services/network/bangumi_acceleration.dart';
+import 'package:kazutv/services/storage/storage.dart';
+import 'package:kazutv/utils/bangumi_mirror_credentials.dart';
+import 'package:kazutv/utils/constants.dart';
+import 'package:kazutv/utils/crypto.dart';
 
 class BangumiClient {
   BangumiClient._();

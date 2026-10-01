@@ -1,6 +1,6 @@
-import 'package:kazumi/services/storage/storage.dart';
-import 'package:kazumi/modules/collect/collect_type.dart';
-import 'package:kazumi/services/logging/logger.dart';
+import 'package:kazutv/services/storage/storage.dart';
+import 'package:kazutv/modules/collect/collect_type.dart';
+import 'package:kazutv/services/logging/logger.dart';
 
 /// 收藏数据访问接口
 ///

@@ -4,19 +4,19 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'package:kazumi/bean/appbar/sys_app_bar.dart';
-import 'package:kazumi/bean/dialog/dialog_helper.dart';
-import 'package:kazumi/bean/widget/loading_indicator.dart';
-import 'package:kazumi/pages/my/my_controller.dart';
-import 'package:kazumi/pages/onboarding/steps/disclaimer_step.dart';
-import 'package:kazumi/pages/onboarding/steps/mirror_settings_step.dart';
-import 'package:kazumi/pages/onboarding/steps/plugin_shop_step.dart';
-import 'package:kazumi/pages/onboarding/steps/update_source_step.dart';
-import 'package:kazumi/plugins/plugins.dart' show pluginNameKey;
-import 'package:kazumi/plugins/plugins_controller.dart';
-import 'package:kazumi/services/logging/logger.dart';
-import 'package:kazumi/services/storage/storage.dart';
-import 'package:kazumi/services/update/startup_update_check.dart';
+import 'package:kazutv/bean/appbar/sys_app_bar.dart';
+import 'package:kazutv/bean/dialog/dialog_helper.dart';
+import 'package:kazutv/bean/widget/loading_indicator.dart';
+import 'package:kazutv/pages/my/my_controller.dart';
+import 'package:kazutv/pages/onboarding/steps/disclaimer_step.dart';
+import 'package:kazutv/pages/onboarding/steps/mirror_settings_step.dart';
+import 'package:kazutv/pages/onboarding/steps/plugin_shop_step.dart';
+import 'package:kazutv/pages/onboarding/steps/update_source_step.dart';
+import 'package:kazutv/plugins/plugins.dart' show pluginNameKey;
+import 'package:kazutv/plugins/plugins_controller.dart';
+import 'package:kazutv/services/logging/logger.dart';
+import 'package:kazutv/services/storage/storage.dart';
+import 'package:kazutv/services/update/startup_update_check.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({

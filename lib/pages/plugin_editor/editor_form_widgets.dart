@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kazumi/pages/plugin_editor/rule_management_widgets.dart';
+import 'package:kazutv/pages/plugin_editor/rule_management_widgets.dart';
 
 class EditorTextField extends StatelessWidget {
   const EditorTextField({

@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'package:kazumi/services/logging/logger.dart';
-import 'package:kazumi/request/config/api_endpoints.dart';
-import 'package:kazumi/request/clients/rules_repo_client.dart';
-import 'package:kazumi/plugins/plugins.dart';
-import 'package:kazumi/modules/plugin/plugin_http_module.dart';
+import 'package:kazutv/services/logging/logger.dart';
+import 'package:kazutv/request/config/api_endpoints.dart';
+import 'package:kazutv/request/clients/rules_repo_client.dart';
+import 'package:kazutv/plugins/plugins.dart';
+import 'package:kazutv/modules/plugin/plugin_http_module.dart';
 
 class PluginCatalogApi {
   static final RulesRepoClient _client = RulesRepoClient.instance;

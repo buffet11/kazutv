@@ -1,5 +1,5 @@
-blank_issues_enabled: false
+blank_issues_enabled: true
 contact_links:
-  - name: Telegram 群组
-    url: https://t.me/kazumi_app
-    about: 如果你需要讨论和帮助，也可以加入 Telegram 群组。
+  - name: 项目主页
+    url: https://github.com/buffet11/kazutv
+    about: 问题反馈与讨论。

@@ -1,17 +1,17 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:kazumi/bean/card/palette_card.dart';
-import 'package:kazumi/utils/constants.dart';
-import 'package:kazumi/services/storage/storage.dart';
-import 'package:kazumi/bean/dialog/dialog_helper.dart';
-import 'package:kazumi/bean/settings/theme_provider.dart';
-import 'package:kazumi/bean/settings/color_type.dart';
-import 'package:kazumi/bean/settings/settings_detail_scaffold.dart';
-import 'package:kazumi/bean/settings/settings_list.dart';
+import 'package:kazutv/bean/card/palette_card.dart';
+import 'package:kazutv/utils/constants.dart';
+import 'package:kazutv/services/storage/storage.dart';
+import 'package:kazutv/bean/dialog/dialog_helper.dart';
+import 'package:kazutv/bean/settings/theme_provider.dart';
+import 'package:kazutv/bean/settings/color_type.dart';
+import 'package:kazutv/bean/settings/settings_detail_scaffold.dart';
+import 'package:kazutv/bean/settings/settings_list.dart';
 import 'package:window_manager/window_manager.dart';
-import 'package:kazumi/utils/device.dart';
-import 'package:kazumi/utils/theme.dart';
+import 'package:kazutv/utils/device.dart';
+import 'package:kazutv/utils/theme.dart';
 
 class ThemeSettingsPage extends StatefulWidget {
   const ThemeSettingsPage({super.key});

@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:kazumi/bean/dialog/dialog_helper.dart';
-import 'package:kazumi/services/logging/logger.dart';
+import 'package:kazutv/bean/dialog/dialog_helper.dart';
+import 'package:kazutv/services/logging/logger.dart';
 
 class TimedShutdownService {
   static final TimedShutdownService _instance =

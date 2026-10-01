@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:kazumi/bean/dialog/dialog_helper.dart';
-import 'package:kazumi/bean/settings/settings_detail_scaffold.dart';
-import 'package:kazumi/bean/settings/settings_list.dart';
-import 'package:kazumi/modules/collect/collect_layout.dart';
-import 'package:kazumi/services/storage/storage.dart';
-import 'package:kazumi/utils/device.dart';
+import 'package:kazutv/bean/dialog/dialog_helper.dart';
+import 'package:kazutv/bean/settings/settings_detail_scaffold.dart';
+import 'package:kazutv/bean/settings/settings_list.dart';
+import 'package:kazutv/modules/collect/collect_layout.dart';
+import 'package:kazutv/services/storage/storage.dart';
+import 'package:kazutv/utils/device.dart';
 
 class InterfaceSettingsPage extends StatefulWidget {
   const InterfaceSettingsPage({super.key});
@@ -20,7 +20,7 @@ class _InterfaceSettingsPageState extends State<InterfaceSettingsPage> {
   bool _savingCollectLayout = false;
   final _collectLayoutMenuController = MenuController();
   final _exitBehaviorMenuController = MenuController();
-  static const _exitBehaviorTitles = ['退出 Kazumi', '最小化至托盘', '每次都询问'];
+  static const _exitBehaviorTitles = ['退出 Kazutv', '最小化至托盘', '每次都询问'];
   int _exitBehavior = GStorage.getSetting(SettingsKeys.exitBehavior)
       .clamp(0, _exitBehaviorTitles.length - 1);
   final MenuController defaultPageMenuController = MenuController();

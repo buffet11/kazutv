@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/services.dart';
-import 'package:kazumi/services/logging/logger.dart';
+import 'package:kazutv/services/logging/logger.dart';
 import 'package:window_manager/window_manager.dart';
-import 'package:kazumi/utils/device.dart';
+import 'package:kazutv/utils/device.dart';
 
 class PipUtils {
   static bool androidPIPInited = false;

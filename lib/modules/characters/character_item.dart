@@ -1,4 +1,4 @@
-import 'package:kazumi/modules/characters/actor_item.dart';
+import 'package:kazutv/modules/characters/actor_item.dart';
 
 class CharacterAvator {
   final String small;

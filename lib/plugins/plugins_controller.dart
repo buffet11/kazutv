@@ -3,15 +3,15 @@ import 'dart:convert';
 import 'package:mobx/mobx.dart';
 import 'package:flutter/services.dart' show rootBundle, AssetManifest;
 import 'package:path_provider/path_provider.dart';
-import 'package:kazumi/plugins/plugins.dart';
-import 'package:kazumi/services/plugin/plugin_validity_tracker.dart';
-import 'package:kazumi/services/plugin/plugin_install_time_tracker.dart';
-import 'package:kazumi/request/apis/plugin_catalog_api.dart';
-import 'package:kazumi/modules/plugin/plugin_http_module.dart';
-import 'package:kazumi/services/logging/logger.dart';
-import 'package:kazumi/utils/async_serial_queue.dart';
-import 'package:kazumi/utils/async_single_flight.dart';
-import 'package:kazumi/utils/version.dart';
+import 'package:kazutv/plugins/plugins.dart';
+import 'package:kazutv/services/plugin/plugin_validity_tracker.dart';
+import 'package:kazutv/services/plugin/plugin_install_time_tracker.dart';
+import 'package:kazutv/request/apis/plugin_catalog_api.dart';
+import 'package:kazutv/modules/plugin/plugin_http_module.dart';
+import 'package:kazutv/services/logging/logger.dart';
+import 'package:kazutv/utils/async_serial_queue.dart';
+import 'package:kazutv/utils/async_single_flight.dart';
+import 'package:kazutv/utils/version.dart';
 
 part 'plugins_controller.g.dart';
 

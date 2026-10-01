@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'package:kazumi/bean/appbar/sys_app_bar.dart';
-import 'package:kazumi/bean/dialog/dialog_helper.dart';
-import 'package:kazumi/bean/widget/state_presentation.dart';
-import 'package:kazumi/modules/bangumi/bangumi_item.dart';
-import 'package:kazumi/modules/bangumi/sync_priority.dart';
-import 'package:kazumi/modules/collect/collect_layout.dart';
-import 'package:kazumi/modules/collect/collect_sync_plan.dart';
-import 'package:kazumi/modules/collect/collect_type.dart';
-import 'package:kazumi/pages/collect/collect_controller.dart';
-import 'package:kazumi/pages/collect/collect_library_view.dart';
-import 'package:kazumi/pages/collect/collect_sync_dialog.dart';
-import 'package:kazumi/services/storage/storage.dart';
+import 'package:kazutv/bean/appbar/sys_app_bar.dart';
+import 'package:kazutv/bean/dialog/dialog_helper.dart';
+import 'package:kazutv/bean/widget/state_presentation.dart';
+import 'package:kazutv/modules/bangumi/bangumi_item.dart';
+import 'package:kazutv/modules/bangumi/sync_priority.dart';
+import 'package:kazutv/modules/collect/collect_layout.dart';
+import 'package:kazutv/modules/collect/collect_sync_plan.dart';
+import 'package:kazutv/modules/collect/collect_type.dart';
+import 'package:kazutv/pages/collect/collect_controller.dart';
+import 'package:kazutv/pages/collect/collect_library_view.dart';
+import 'package:kazutv/pages/collect/collect_sync_dialog.dart';
+import 'package:kazutv/services/storage/storage.dart';
 
 class CollectPage extends StatefulWidget {
   const CollectPage({

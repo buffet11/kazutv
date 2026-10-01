@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'package:kazumi/bean/settings/settings_detail_scaffold.dart';
-import 'package:kazumi/bean/widget/state_presentation.dart';
-import 'package:kazumi/bean/widget/tonal_card.dart';
-import 'package:kazumi/pages/settings/sync/sync_settings_widgets.dart';
-import 'package:kazumi/services/logging/logger.dart';
-import 'package:kazumi/services/storage/storage.dart';
-import 'package:kazumi/services/sync/webdav.dart';
+import 'package:kazutv/bean/settings/settings_detail_scaffold.dart';
+import 'package:kazutv/bean/widget/state_presentation.dart';
+import 'package:kazutv/bean/widget/tonal_card.dart';
+import 'package:kazutv/pages/settings/sync/sync_settings_widgets.dart';
+import 'package:kazutv/services/logging/logger.dart';
+import 'package:kazutv/services/storage/storage.dart';
+import 'package:kazutv/services/sync/webdav.dart';
 
 class WebDavServerPage extends StatefulWidget {
   const WebDavServerPage({super.key});

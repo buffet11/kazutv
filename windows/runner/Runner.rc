@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "kazumi" "\0"
+            VALUE "CompanyName", "com.buffet11" "\0"
+            VALUE "FileDescription", "Kazutv" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "kazumi" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "kazumi.exe" "\0"
-            VALUE "ProductName", "kazumi" "\0"
+            VALUE "InternalName", "kazutv" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2026 Kazutv. Based on Kazumi (GPL-3.0)." "\0"
+            VALUE "OriginalFilename", "kazutv.exe" "\0"
+            VALUE "ProductName", "Kazutv" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

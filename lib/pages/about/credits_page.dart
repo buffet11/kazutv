@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:kazumi/bean/settings/settings_detail_scaffold.dart';
-import 'package:kazumi/bean/widget/content_section.dart';
-import 'package:kazumi/pages/about/about_widgets.dart';
-import 'package:kazumi/request/config/api_endpoints.dart';
+import 'package:kazutv/bean/settings/settings_detail_scaffold.dart';
+import 'package:kazutv/bean/widget/content_section.dart';
+import 'package:kazutv/pages/about/about_widgets.dart';
+import 'package:kazutv/request/config/api_endpoints.dart';
 
 class CreditsPage extends StatelessWidget {
   const CreditsPage({super.key});

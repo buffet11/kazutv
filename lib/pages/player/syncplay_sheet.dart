@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import 'package:kazumi/bean/dialog/adaptive_bottom_sheet.dart';
-import 'package:kazumi/bean/dialog/material_bottom_sheet.dart';
-import 'package:kazumi/bean/widget/loading_indicator.dart';
-import 'package:kazumi/bean/widget/split_list_row.dart';
-import 'package:kazumi/bean/widget/tonal_card.dart';
-import 'package:kazumi/pages/player/player_controller.dart';
-import 'package:kazumi/services/player/syncplay_endpoint.dart';
-import 'package:kazumi/services/storage/storage.dart';
-import 'package:kazumi/utils/device.dart';
+import 'package:kazutv/bean/dialog/adaptive_bottom_sheet.dart';
+import 'package:kazutv/bean/dialog/material_bottom_sheet.dart';
+import 'package:kazutv/bean/widget/loading_indicator.dart';
+import 'package:kazutv/bean/widget/split_list_row.dart';
+import 'package:kazutv/bean/widget/tonal_card.dart';
+import 'package:kazutv/pages/player/player_controller.dart';
+import 'package:kazutv/services/player/syncplay_endpoint.dart';
+import 'package:kazutv/services/storage/storage.dart';
+import 'package:kazutv/utils/device.dart';
 
 // Close each step before opening the next to avoid stacked modal routes.
 enum _SyncPlayDestination { create, join, server }

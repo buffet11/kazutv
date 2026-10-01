@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'package:kazumi/bean/appbar/sys_app_bar.dart';
-import 'package:kazumi/bean/settings/settings_detail_scaffold.dart';
-import 'package:kazumi/bean/settings/settings_list.dart';
-import 'package:kazumi/bean/widget/content_section.dart';
-import 'package:kazumi/pages/settings/player_settings.dart';
-import 'package:kazumi/utils/constants.dart';
+import 'package:kazutv/bean/appbar/sys_app_bar.dart';
+import 'package:kazutv/bean/settings/settings_detail_scaffold.dart';
+import 'package:kazutv/bean/settings/settings_list.dart';
+import 'package:kazutv/bean/widget/content_section.dart';
+import 'package:kazutv/pages/settings/player_settings.dart';
+import 'package:kazutv/utils/constants.dart';
 
 class _SettingsCategory {
   const _SettingsCategory({

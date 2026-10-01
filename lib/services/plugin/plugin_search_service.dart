@@ -1,10 +1,10 @@
-import 'package:kazumi/modules/search/plugin_search_module.dart';
-import 'package:kazumi/pages/info/info_controller.dart';
-import 'package:kazumi/plugins/plugins.dart';
-import 'package:kazumi/plugins/plugins_controller.dart';
-import 'package:kazumi/services/logging/logger.dart';
-import 'package:kazumi/services/plugin/rule_engine_models.dart';
-import 'package:kazumi/utils/async_session.dart';
+import 'package:kazutv/modules/search/plugin_search_module.dart';
+import 'package:kazutv/pages/info/info_controller.dart';
+import 'package:kazutv/plugins/plugins.dart';
+import 'package:kazutv/plugins/plugins_controller.dart';
+import 'package:kazutv/services/logging/logger.dart';
+import 'package:kazutv/services/plugin/rule_engine_models.dart';
+import 'package:kazutv/utils/async_session.dart';
 
 class PluginSearchService {
   PluginSearchService({

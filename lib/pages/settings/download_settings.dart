@@ -3,13 +3,13 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
-import 'package:kazumi/bean/dialog/dialog_helper.dart';
-import 'package:kazumi/bean/settings/settings_detail_scaffold.dart';
-import 'package:kazumi/bean/settings/settings_list.dart';
-import 'package:kazumi/bean/widget/loading_indicator.dart';
-import 'package:kazumi/services/platform/secure_bookmark_service.dart';
-import 'package:kazumi/services/storage/storage.dart';
-import 'package:kazumi/utils/file_system.dart';
+import 'package:kazutv/bean/dialog/dialog_helper.dart';
+import 'package:kazutv/bean/settings/settings_detail_scaffold.dart';
+import 'package:kazutv/bean/settings/settings_list.dart';
+import 'package:kazutv/bean/widget/loading_indicator.dart';
+import 'package:kazutv/services/platform/secure_bookmark_service.dart';
+import 'package:kazutv/services/storage/storage.dart';
+import 'package:kazutv/utils/file_system.dart';
 
 class DownloadSettingsPage extends StatefulWidget {
   const DownloadSettingsPage({super.key});

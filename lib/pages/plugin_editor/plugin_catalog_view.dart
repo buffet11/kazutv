@@ -2,17 +2,17 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:kazumi/bean/card/rule_card.dart';
-import 'package:kazumi/bean/dialog/dialog_helper.dart';
-import 'package:kazumi/bean/widget/error_widget.dart';
-import 'package:kazumi/bean/widget/empty_state_widget.dart';
-import 'package:kazumi/bean/widget/loading_indicator.dart';
-import 'package:kazumi/bean/widget/state_presentation.dart';
-import 'package:kazumi/modules/plugin/plugin_http_module.dart';
-import 'package:kazumi/pages/plugin_editor/plugin_update_actions.dart';
-import 'package:kazumi/pages/plugin_editor/rule_management_widgets.dart';
-import 'package:kazumi/plugins/plugins_controller.dart';
-import 'package:kazumi/services/storage/storage.dart';
+import 'package:kazutv/bean/card/rule_card.dart';
+import 'package:kazutv/bean/dialog/dialog_helper.dart';
+import 'package:kazutv/bean/widget/error_widget.dart';
+import 'package:kazutv/bean/widget/empty_state_widget.dart';
+import 'package:kazutv/bean/widget/loading_indicator.dart';
+import 'package:kazutv/bean/widget/state_presentation.dart';
+import 'package:kazutv/modules/plugin/plugin_http_module.dart';
+import 'package:kazutv/pages/plugin_editor/plugin_update_actions.dart';
+import 'package:kazutv/pages/plugin_editor/rule_management_widgets.dart';
+import 'package:kazutv/plugins/plugins_controller.dart';
+import 'package:kazutv/services/storage/storage.dart';
 
 enum _CatalogSort { lastUpdate, name }
 

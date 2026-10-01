@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kazumi/modules/download/download_module.dart';
-import 'package:kazumi/pages/player/controller/player_models.dart';
-import 'package:kazumi/pages/video/video_controller.dart';
+import 'package:kazutv/modules/download/download_module.dart';
+import 'package:kazutv/pages/player/controller/player_models.dart';
+import 'package:kazutv/pages/video/video_controller.dart';
 
 void main() {
   group('EpisodeRef', () {

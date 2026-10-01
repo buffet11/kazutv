@@ -3,11 +3,11 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive_ce/hive.dart';
-import 'package:kazumi/modules/bangumi/bangumi_item.dart';
-import 'package:kazumi/modules/bangumi/bangumi_tag.dart';
-import 'package:kazumi/modules/history/history_module.dart';
-import 'package:kazumi/repositories/history_repository.dart';
-import 'package:kazumi/services/storage/history_storage_coordinator.dart';
+import 'package:kazutv/modules/bangumi/bangumi_item.dart';
+import 'package:kazutv/modules/bangumi/bangumi_tag.dart';
+import 'package:kazutv/modules/history/history_module.dart';
+import 'package:kazutv/repositories/history_repository.dart';
+import 'package:kazutv/services/storage/history_storage_coordinator.dart';
 
 void main() {
   late Directory tempDir;

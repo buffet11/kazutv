@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'package:kazumi/bean/dialog/dialog_helper.dart';
-import 'package:kazumi/bean/settings/settings_detail_scaffold.dart';
-import 'package:kazumi/bean/settings/settings_list.dart';
-import 'package:kazumi/services/storage/image_cache_service.dart';
+import 'package:kazutv/bean/dialog/dialog_helper.dart';
+import 'package:kazutv/bean/settings/settings_detail_scaffold.dart';
+import 'package:kazutv/bean/settings/settings_list.dart';
+import 'package:kazutv/services/storage/image_cache_service.dart';
 
 class StorageSettingsPage extends StatefulWidget {
   const StorageSettingsPage({super.key});

@@ -1,6 +1,6 @@
-import 'package:kazumi/modules/bangumi/bangumi_item.dart';
-import 'package:kazumi/modules/history/history_module.dart';
-import 'package:kazumi/repositories/history_repository.dart';
+import 'package:kazutv/modules/bangumi/bangumi_item.dart';
+import 'package:kazutv/modules/history/history_module.dart';
+import 'package:kazutv/repositories/history_repository.dart';
 import 'package:mobx/mobx.dart';
 
 part 'history_controller.g.dart';

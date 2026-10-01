@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:kazumi/services/plugin/plugin_cookie_manager.dart';
-import 'package:kazumi/services/logging/logger.dart';
-import 'package:kazumi/utils/async_single_flight.dart';
-import 'package:kazumi/webview/captcha/captcha_webview_controller.dart';
+import 'package:kazutv/services/plugin/plugin_cookie_manager.dart';
+import 'package:kazutv/services/logging/logger.dart';
+import 'package:kazutv/utils/async_single_flight.dart';
+import 'package:kazutv/webview/captcha/captcha_webview_controller.dart';
 
 /// 验证码验证服务
 ///

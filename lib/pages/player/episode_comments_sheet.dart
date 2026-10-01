@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:kazumi/bean/dialog/dialog_helper.dart';
-import 'package:kazumi/modules/bangumi/episode_item.dart';
-import 'package:kazumi/pages/player/episode_comments_picker.dart';
-import 'package:kazumi/pages/player/episode_comments_view.dart';
-import 'package:kazumi/pages/video/video_controller.dart';
-import 'package:kazumi/request/apis/bangumi_api.dart';
+import 'package:kazutv/bean/dialog/dialog_helper.dart';
+import 'package:kazutv/modules/bangumi/episode_item.dart';
+import 'package:kazutv/pages/player/episode_comments_picker.dart';
+import 'package:kazutv/pages/player/episode_comments_view.dart';
+import 'package:kazutv/pages/video/video_controller.dart';
+import 'package:kazutv/request/apis/bangumi_api.dart';
 
 class EpisodeCommentsSheet extends StatefulWidget {
   const EpisodeCommentsSheet({

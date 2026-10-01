@@ -1,10 +1,10 @@
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
-import 'package:kazumi/modules/roads/road_module.dart';
-import 'package:kazumi/modules/search/plugin_search_module.dart';
-import 'package:kazumi/plugins/anti_crawler_config.dart';
-import 'package:kazumi/services/plugin/rule_engine_models.dart';
-import 'package:kazumi/utils/episode_url.dart';
+import 'package:kazutv/modules/roads/road_module.dart';
+import 'package:kazutv/modules/search/plugin_search_module.dart';
+import 'package:kazutv/plugins/anti_crawler_config.dart';
+import 'package:kazutv/services/plugin/rule_engine_models.dart';
+import 'package:kazutv/utils/episode_url.dart';
 import 'package:xpath_selector_html_parser/xpath_selector_html_parser.dart';
 
 enum XPathRuleFormatKind {

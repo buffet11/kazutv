@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:kazumi/bean/settings/settings_detail_scaffold.dart';
-import 'package:kazumi/bean/widget/content_section.dart';
-import 'package:kazumi/pages/about/about_widgets.dart';
-import 'package:kazumi/request/config/api_endpoints.dart';
+import 'package:kazutv/bean/settings/settings_detail_scaffold.dart';
+import 'package:kazutv/bean/widget/content_section.dart';
+import 'package:kazutv/pages/about/about_widgets.dart';
+import 'package:kazutv/request/config/api_endpoints.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key, required this.onCheckUpdate});
@@ -112,7 +112,7 @@ class _ProjectHeader extends StatelessWidget {
           Semantics(
             header: true,
             child: Text(
-              'Kazumi',
+              'Kazutv',
               style: theme.textTheme.displayMedium?.copyWith(
                 color: colors.primary,
                 fontWeight: FontWeight.w600,
@@ -128,7 +128,7 @@ class _ProjectHeader extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            '基于自定义规则的开源番剧应用',
+            '番剧与影视聚合播放器 · 基于 Kazumi 二次开发',
             style: theme.textTheme.bodyLarge,
           ),
           const SizedBox(height: 20),

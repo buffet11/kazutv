@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:kazumi/webview/video/video_webview_controller.dart';
-import 'package:kazumi/services/video_source/video_source_service.dart';
+import 'package:kazutv/webview/video/video_webview_controller.dart';
+import 'package:kazutv/services/video_source/video_source_service.dart';
 
 /// WebView 视频源解析服务
 ///

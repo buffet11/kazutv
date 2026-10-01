@@ -2,19 +2,19 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:kazumi/bean/dialog/dialog_helper.dart';
-import 'package:kazumi/request/clients/download_http_client.dart';
-import 'package:kazumi/request/config/api_endpoints.dart';
-import 'package:kazumi/request/core/network_exception.dart';
-import 'package:kazumi/services/logging/logger.dart';
-import 'package:kazumi/services/storage/storage.dart';
+import 'package:kazutv/bean/dialog/dialog_helper.dart';
+import 'package:kazutv/request/clients/download_http_client.dart';
+import 'package:kazutv/request/config/api_endpoints.dart';
+import 'package:kazutv/request/core/network_exception.dart';
+import 'package:kazutv/services/logging/logger.dart';
+import 'package:kazutv/services/storage/storage.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:kazumi/utils/device.dart';
-import 'package:kazumi/utils/date_time.dart';
-import 'package:kazumi/utils/crypto.dart';
-import 'package:kazumi/utils/version.dart';
+import 'package:kazutv/utils/device.dart';
+import 'package:kazutv/utils/date_time.dart';
+import 'package:kazutv/utils/crypto.dart';
+import 'package:kazutv/utils/version.dart';
 
 enum InstallationType {
   windowsMsix,
@@ -762,6 +762,6 @@ class AutoUpdater {
     } else if (Platform.isAndroid) {
       extension = '.apk';
     }
-    return 'Kazumi-$version$extension';
+    return 'Kazutv-$version$extension';
   }
 }

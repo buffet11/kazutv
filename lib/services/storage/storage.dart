@@ -1,20 +1,20 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:hive_ce/hive.dart';
-import 'package:kazumi/services/logging/logger.dart';
+import 'package:kazutv/services/logging/logger.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:kazumi/modules/bangumi/bangumi_item.dart';
-import 'package:kazumi/hive_registrar.g.dart';
-import 'package:kazumi/modules/history/history_module.dart';
-import 'package:kazumi/modules/collect/collect_module.dart';
-import 'package:kazumi/modules/collect/collect_change_module.dart';
-import 'package:kazumi/modules/collect/collect_sync_merger.dart';
-import 'package:kazumi/modules/search/search_history_module.dart';
-import 'package:kazumi/modules/download/download_module.dart';
-import 'package:kazumi/services/storage/history_storage_coordinator.dart';
+import 'package:kazutv/modules/bangumi/bangumi_item.dart';
+import 'package:kazutv/hive_registrar.g.dart';
+import 'package:kazutv/modules/history/history_module.dart';
+import 'package:kazutv/modules/collect/collect_module.dart';
+import 'package:kazutv/modules/collect/collect_change_module.dart';
+import 'package:kazutv/modules/collect/collect_sync_merger.dart';
+import 'package:kazutv/modules/search/search_history_module.dart';
+import 'package:kazutv/modules/download/download_module.dart';
+import 'package:kazutv/services/storage/history_storage_coordinator.dart';
 
-import 'package:kazumi/services/storage/settings_keys.dart';
-export 'package:kazumi/services/storage/settings_keys.dart';
+import 'package:kazutv/services/storage/settings_keys.dart';
+export 'package:kazutv/services/storage/settings_keys.dart';
 
 class GStorage {
   /// Don't use favorites box, it's replaced by collectibles.

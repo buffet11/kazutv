@@ -1,17 +1,17 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:kazumi/bean/widget/empty_state_widget.dart';
+import 'package:kazutv/bean/widget/empty_state_widget.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import 'package:kazumi/bean/card/user_comments_card.dart';
-import 'package:kazumi/bean/dialog/material_bottom_sheet.dart';
-import 'package:kazumi/bean/widget/connected_tabs.dart';
-import 'package:kazumi/bean/widget/error_widget.dart';
-import 'package:kazumi/modules/character/character_full_item.dart';
-import 'package:kazumi/modules/comments/comment_item.dart';
-import 'package:kazumi/pages/info/character_info_view.dart';
-import 'package:kazumi/request/apis/bangumi_api.dart';
+import 'package:kazutv/bean/card/user_comments_card.dart';
+import 'package:kazutv/bean/dialog/material_bottom_sheet.dart';
+import 'package:kazutv/bean/widget/connected_tabs.dart';
+import 'package:kazutv/bean/widget/error_widget.dart';
+import 'package:kazutv/modules/character/character_full_item.dart';
+import 'package:kazutv/modules/comments/comment_item.dart';
+import 'package:kazutv/pages/info/character_info_view.dart';
+import 'package:kazutv/request/apis/bangumi_api.dart';
 
 class CharacterPage extends StatefulWidget {
   const CharacterPage({

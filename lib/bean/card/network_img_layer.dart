@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:kazumi/services/logging/logger.dart';
-import 'package:kazumi/utils/constants.dart';
-import 'package:kazumi/utils/image_extension.dart';
+import 'package:kazutv/services/logging/logger.dart';
+import 'package:kazutv/utils/constants.dart';
+import 'package:kazutv/utils/image_extension.dart';
 
 class NetworkImgLayer extends StatelessWidget {
   const NetworkImgLayer({

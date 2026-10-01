@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:kazumi/request/config/api_endpoints.dart';
-import 'package:kazumi/request/core/bangumi_transport.dart';
-import 'package:kazumi/request/core/dio_logger_interceptor.dart';
-import 'package:kazumi/request/core/network_config.dart';
-import 'package:kazumi/services/logging/logger.dart';
-import 'package:kazumi/services/storage/storage.dart';
-import 'package:kazumi/utils/http_headers.dart';
+import 'package:kazutv/request/config/api_endpoints.dart';
+import 'package:kazutv/request/core/bangumi_transport.dart';
+import 'package:kazutv/request/core/dio_logger_interceptor.dart';
+import 'package:kazutv/request/core/network_config.dart';
+import 'package:kazutv/services/logging/logger.dart';
+import 'package:kazutv/services/storage/storage.dart';
+import 'package:kazutv/utils/http_headers.dart';
 
 class DioFactory {
   DioFactory._();

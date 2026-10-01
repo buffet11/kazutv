@@ -10,14 +10,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:kazumi/bean/appbar/sys_app_bar.dart';
-import 'package:kazumi/bean/dialog/dialog_helper.dart';
-import 'package:kazumi/bean/widget/empty_state_widget.dart';
-import 'package:kazumi/bean/widget/error_widget.dart';
-import 'package:kazumi/bean/widget/loading_indicator.dart';
-import 'package:kazumi/bean/widget/state_presentation.dart';
-import 'package:kazumi/modules/search/image_search_module.dart';
-import 'package:kazumi/pages/search/search_controller.dart';
+import 'package:kazutv/bean/appbar/sys_app_bar.dart';
+import 'package:kazutv/bean/dialog/dialog_helper.dart';
+import 'package:kazutv/bean/widget/empty_state_widget.dart';
+import 'package:kazutv/bean/widget/error_widget.dart';
+import 'package:kazutv/bean/widget/loading_indicator.dart';
+import 'package:kazutv/bean/widget/state_presentation.dart';
+import 'package:kazutv/modules/search/image_search_module.dart';
+import 'package:kazutv/pages/search/search_controller.dart';
 
 part 'image_search_widgets.dart';
 

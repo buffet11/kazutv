@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:kazumi/bean/appbar/sys_app_bar.dart';
-import 'package:kazumi/bean/dialog/dialog_helper.dart';
-import 'package:kazumi/modules/collect/collect_type.dart';
-import 'package:kazumi/modules/history/history_module.dart';
-import 'package:kazumi/pages/collect/collect_controller.dart';
-import 'package:kazumi/pages/history/history_controller.dart';
-import 'package:kazumi/pages/history/history_list_view.dart';
-import 'package:kazumi/pages/history/history_record_tile.dart';
-import 'package:kazumi/services/player/history_playback_service.dart';
-import 'package:kazumi/services/plugin/rule_engine_models.dart'
+import 'package:kazutv/bean/appbar/sys_app_bar.dart';
+import 'package:kazutv/bean/dialog/dialog_helper.dart';
+import 'package:kazutv/modules/collect/collect_type.dart';
+import 'package:kazutv/modules/history/history_module.dart';
+import 'package:kazutv/pages/collect/collect_controller.dart';
+import 'package:kazutv/pages/history/history_controller.dart';
+import 'package:kazutv/pages/history/history_list_view.dart';
+import 'package:kazutv/pages/history/history_record_tile.dart';
+import 'package:kazutv/services/player/history_playback_service.dart';
+import 'package:kazutv/services/plugin/rule_engine_models.dart'
     show RuleCancelToken;
-import 'package:kazumi/utils/device.dart';
+import 'package:kazutv/utils/device.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key, required this.controller});

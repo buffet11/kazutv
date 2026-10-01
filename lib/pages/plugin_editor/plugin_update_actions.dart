@@ -1,5 +1,5 @@
-import 'package:kazumi/bean/dialog/dialog_helper.dart';
-import 'package:kazumi/plugins/plugins_controller.dart';
+import 'package:kazutv/bean/dialog/dialog_helper.dart';
+import 'package:kazutv/plugins/plugins_controller.dart';
 
 Future<void> updateAllPluginsWithFeedback(
   PluginsController controller, {

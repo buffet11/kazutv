@@ -1,4 +1,4 @@
-package com.example.kazumi
+package com.buffet11.kazutv
 
 import android.app.PendingIntent
 import android.content.Intent

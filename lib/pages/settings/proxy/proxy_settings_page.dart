@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:kazumi/bean/dialog/dialog_helper.dart';
-import 'package:kazumi/bean/settings/network_mirror_settings.dart';
-import 'package:kazumi/bean/settings/settings_detail_scaffold.dart';
-import 'package:kazumi/bean/settings/settings_list.dart';
-import 'package:kazumi/services/network/proxy_manager.dart';
-import 'package:kazumi/services/storage/storage.dart';
+import 'package:kazutv/bean/dialog/dialog_helper.dart';
+import 'package:kazutv/bean/settings/network_mirror_settings.dart';
+import 'package:kazutv/bean/settings/settings_detail_scaffold.dart';
+import 'package:kazutv/bean/settings/settings_list.dart';
+import 'package:kazutv/services/network/proxy_manager.dart';
+import 'package:kazutv/services/storage/storage.dart';
 
 class ProxySettingsPage extends StatefulWidget {
   const ProxySettingsPage({super.key});

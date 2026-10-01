@@ -1,11 +1,11 @@
-import 'package:kazumi/modules/danmaku/danmaku_ch_convert.dart';
-import 'package:kazumi/modules/danmaku/danmaku_episode_response.dart';
-import 'package:kazumi/modules/danmaku/danmaku_module.dart';
-import 'package:kazumi/modules/danmaku/danmaku_search_response.dart';
-import 'package:kazumi/request/clients/danmaku_client.dart';
-import 'package:kazumi/request/config/api_endpoints.dart';
-import 'package:kazumi/services/logging/logger.dart';
-import 'package:kazumi/services/storage/storage.dart';
+import 'package:kazutv/modules/danmaku/danmaku_ch_convert.dart';
+import 'package:kazutv/modules/danmaku/danmaku_episode_response.dart';
+import 'package:kazutv/modules/danmaku/danmaku_module.dart';
+import 'package:kazutv/modules/danmaku/danmaku_search_response.dart';
+import 'package:kazutv/request/clients/danmaku_client.dart';
+import 'package:kazutv/request/config/api_endpoints.dart';
+import 'package:kazutv/services/logging/logger.dart';
+import 'package:kazutv/services/storage/storage.dart';
 
 class DanmakuApi {
   static final DanmakuClient _client = DanmakuClient.instance;

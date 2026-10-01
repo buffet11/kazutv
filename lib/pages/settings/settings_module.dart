@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:kazumi/pages/about/about_module.dart';
-import 'package:kazumi/pages/download/download_page_module.dart';
-import 'package:kazumi/pages/history/history_module.dart';
-import 'package:kazumi/pages/logs/logs_page.dart';
-import 'package:kazumi/pages/plugin_editor/plugin_module.dart';
-import 'package:kazumi/pages/settings/danmaku/danmaku_module.dart';
-import 'package:kazumi/pages/settings/decoder_settings.dart';
-import 'package:kazumi/pages/settings/displaymode_settings.dart';
-import 'package:kazumi/pages/settings/download_settings.dart';
-import 'package:kazumi/pages/settings/interface_settings.dart';
-import 'package:kazumi/pages/settings/keyboard_settings.dart';
-import 'package:kazumi/pages/settings/player_settings.dart';
-import 'package:kazumi/pages/settings/proxy/proxy_module.dart';
-import 'package:kazumi/pages/settings/renderer_settings.dart';
-import 'package:kazumi/pages/settings/settings_page.dart';
-import 'package:kazumi/pages/settings/storage_settings.dart';
-import 'package:kazumi/pages/settings/super_resolution_settings.dart';
-import 'package:kazumi/pages/settings/sync/bangumi_sync_page.dart';
-import 'package:kazumi/pages/settings/sync/sync_settings_page.dart';
-import 'package:kazumi/pages/settings/sync/webdav_server_page.dart';
-import 'package:kazumi/pages/settings/sync/webdav_sync_page.dart';
-import 'package:kazumi/pages/settings/theme_settings_page.dart';
-import 'package:kazumi/pages/settings/update_settings.dart';
-import 'package:kazumi/request/config/api_endpoints.dart';
-import 'package:kazumi/services/sync/danmaku_shield_sync_service.dart';
+import 'package:kazutv/pages/about/about_module.dart';
+import 'package:kazutv/pages/download/download_page_module.dart';
+import 'package:kazutv/pages/history/history_module.dart';
+import 'package:kazutv/pages/logs/logs_page.dart';
+import 'package:kazutv/pages/plugin_editor/plugin_module.dart';
+import 'package:kazutv/pages/settings/danmaku/danmaku_module.dart';
+import 'package:kazutv/pages/settings/decoder_settings.dart';
+import 'package:kazutv/pages/settings/displaymode_settings.dart';
+import 'package:kazutv/pages/settings/download_settings.dart';
+import 'package:kazutv/pages/settings/interface_settings.dart';
+import 'package:kazutv/pages/settings/keyboard_settings.dart';
+import 'package:kazutv/pages/settings/player_settings.dart';
+import 'package:kazutv/pages/settings/proxy/proxy_module.dart';
+import 'package:kazutv/pages/settings/renderer_settings.dart';
+import 'package:kazutv/pages/settings/settings_page.dart';
+import 'package:kazutv/pages/settings/storage_settings.dart';
+import 'package:kazutv/pages/settings/super_resolution_settings.dart';
+import 'package:kazutv/pages/settings/sync/bangumi_sync_page.dart';
+import 'package:kazutv/pages/settings/sync/sync_settings_page.dart';
+import 'package:kazutv/pages/settings/sync/webdav_server_page.dart';
+import 'package:kazutv/pages/settings/sync/webdav_sync_page.dart';
+import 'package:kazutv/pages/settings/theme_settings_page.dart';
+import 'package:kazutv/pages/settings/update_settings.dart';
+import 'package:kazutv/request/config/api_endpoints.dart';
+import 'package:kazutv/services/sync/danmaku_shield_sync_service.dart';
 
 final settingsModule = createModule(
   path: '/settings',
@@ -94,9 +94,9 @@ final settingsModule = createModule(
       ..route(
         '/about/license',
         child: (context, state) => const LicensePage(
-          applicationName: 'Kazumi',
+          applicationName: 'Kazutv',
           applicationVersion: ApiEndpoints.version,
-          applicationLegalese: 'Kazumi · GNU General Public License v3.0',
+          applicationLegalese: 'Kazutv · GNU General Public License v3.0',
         ),
       )
       ..module(historyModule)

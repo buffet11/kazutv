@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kazumi/bean/dialog/dialog_helper.dart';
-import 'package:kazumi/bean/widget/loading_indicator.dart';
-import 'package:kazumi/pages/plugin_editor/rule_management_widgets.dart';
-import 'package:kazumi/plugins/plugins.dart';
-import 'package:kazumi/plugins/plugins_controller.dart';
-import 'package:kazumi/services/plugin/plugin_import_parser.dart';
-import 'package:kazumi/utils/encoding.dart';
+import 'package:kazutv/bean/dialog/dialog_helper.dart';
+import 'package:kazutv/bean/widget/loading_indicator.dart';
+import 'package:kazutv/pages/plugin_editor/rule_management_widgets.dart';
+import 'package:kazutv/plugins/plugins.dart';
+import 'package:kazutv/plugins/plugins_controller.dart';
+import 'package:kazutv/services/plugin/plugin_import_parser.dart';
+import 'package:kazutv/utils/encoding.dart';
 
 enum RuleAddSource { catalog, clipboard, file, create }
 

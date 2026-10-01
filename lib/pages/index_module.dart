@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:kazumi/bean/widget/error_widget.dart';
-import 'package:kazumi/bean/widget/image_preview.dart';
-import 'package:kazumi/pages/collect/collect_module.dart';
-import 'package:kazumi/pages/index_page.dart';
-import 'package:kazumi/pages/info/info_module.dart';
-import 'package:kazumi/pages/init_page.dart';
-import 'package:kazumi/pages/my/my_module.dart';
-import 'package:kazumi/pages/onboarding/onboarding_page.dart';
-import 'package:kazumi/pages/popular/popular_controller.dart';
-import 'package:kazumi/pages/popular/popular_module.dart';
-import 'package:kazumi/pages/route_error_page.dart';
-import 'package:kazumi/pages/search/search_module.dart';
-import 'package:kazumi/pages/settings/settings_module.dart';
-import 'package:kazumi/pages/timeline/timeline_controller.dart';
-import 'package:kazumi/pages/timeline/timeline_module.dart';
-import 'package:kazumi/pages/video/video_module.dart';
-import 'package:kazumi/services/storage/storage.dart';
-import 'package:kazumi/plugins/plugins_controller.dart';
-import 'package:kazumi/pages/collect/collect_controller.dart';
-import 'package:kazumi/pages/my/my_controller.dart';
-import 'package:kazumi/pages/download/download_controller.dart';
-import 'package:kazumi/services/shaders/shader_asset_service.dart';
-import 'package:kazumi/services/sync/danmaku_shield_sync_service.dart';
+import 'package:kazutv/bean/widget/error_widget.dart';
+import 'package:kazutv/bean/widget/image_preview.dart';
+import 'package:kazutv/pages/collect/collect_module.dart';
+import 'package:kazutv/pages/index_page.dart';
+import 'package:kazutv/pages/info/info_module.dart';
+import 'package:kazutv/pages/init_page.dart';
+import 'package:kazutv/pages/my/my_module.dart';
+import 'package:kazutv/pages/onboarding/onboarding_page.dart';
+import 'package:kazutv/pages/popular/popular_controller.dart';
+import 'package:kazutv/pages/popular/popular_module.dart';
+import 'package:kazutv/pages/route_error_page.dart';
+import 'package:kazutv/pages/search/search_module.dart';
+import 'package:kazutv/pages/settings/settings_module.dart';
+import 'package:kazutv/pages/timeline/timeline_controller.dart';
+import 'package:kazutv/pages/timeline/timeline_module.dart';
+import 'package:kazutv/pages/video/video_module.dart';
+import 'package:kazutv/services/storage/storage.dart';
+import 'package:kazutv/plugins/plugins_controller.dart';
+import 'package:kazutv/pages/collect/collect_controller.dart';
+import 'package:kazutv/pages/my/my_controller.dart';
+import 'package:kazutv/pages/download/download_controller.dart';
+import 'package:kazutv/services/shaders/shader_asset_service.dart';
+import 'package:kazutv/services/sync/danmaku_shield_sync_service.dart';
 
 final _tabTransition = CustomTransition(
   duration: const Duration(milliseconds: 70),
@@ -93,7 +93,7 @@ final indexModule = createModule(
       ..route(
         '/error',
         child: (context, state) => Scaffold(
-          appBar: AppBar(title: const Text('Kazumi')),
+          appBar: AppBar(title: const Text('Kazutv')),
           body: const GeneralErrorWidget(
             title: '初始化失败',
             errMsg: '请重新启动应用后再试。',

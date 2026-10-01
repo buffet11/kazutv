@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'package:kazumi/webview/video/video_webview_controller.dart';
-import 'package:kazumi/services/storage/storage.dart';
-import 'package:kazumi/services/network/proxy_utils.dart';
-import 'package:kazumi/services/logging/logger.dart';
+import 'package:kazutv/webview/video/video_webview_controller.dart';
+import 'package:kazutv/services/storage/storage.dart';
+import 'package:kazutv/services/network/proxy_utils.dart';
+import 'package:kazutv/services/logging/logger.dart';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
-import 'package:kazumi/utils/media.dart';
+import 'package:kazutv/utils/media.dart';
 
 class VideoWebviewLinuxImpl extends VideoWebviewController<Webview> {
   bool bridgeInited = false;

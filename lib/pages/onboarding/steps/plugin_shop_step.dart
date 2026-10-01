@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kazumi/pages/onboarding/onboarding_step_layout.dart';
-import 'package:kazumi/pages/plugin_editor/plugin_catalog_view.dart';
-import 'package:kazumi/plugins/plugins_controller.dart';
+import 'package:kazutv/pages/onboarding/onboarding_step_layout.dart';
+import 'package:kazutv/pages/plugin_editor/plugin_catalog_view.dart';
+import 'package:kazutv/plugins/plugins_controller.dart';
 
 class PluginShopStep extends StatelessWidget {
   const PluginShopStep({

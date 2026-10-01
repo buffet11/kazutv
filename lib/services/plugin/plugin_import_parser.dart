@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:kazumi/plugins/plugins.dart';
-import 'package:kazumi/utils/encoding.dart';
+import 'package:kazutv/plugins/plugins.dart';
+import 'package:kazutv/utils/encoding.dart';
 
 class PluginImportParseResult {
   const PluginImportParseResult({
@@ -113,7 +113,7 @@ class PluginImportParser {
         ?.group(0)
         ?.trimRight();
     if (payload == null || payload.isEmpty) {
-      throw const FormatException('Missing payload in Kazumi rule link');
+      throw const FormatException('Missing payload in Kazutv rule link');
     }
 
     final candidates = <String>[payload];
@@ -139,7 +139,7 @@ class PluginImportParser {
         // Try a shorter prefix in case prose follows the rule link.
       }
     }
-    throw firstError ?? const FormatException('Invalid Kazumi rule link');
+    throw firstError ?? const FormatException('Invalid Kazutv rule link');
   }
 
   static void _parseEntry(

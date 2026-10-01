@@ -1,26 +1,26 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:kazumi/app_module.dart';
-import 'package:kazumi/app_widget.dart';
+import 'package:kazutv/app_module.dart';
+import 'package:kazutv/app_widget.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:kazumi/bean/settings/theme_provider.dart';
+import 'package:kazutv/bean/settings/theme_provider.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:kazumi/services/storage/storage.dart';
+import 'package:kazutv/services/storage/storage.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
-import 'package:kazumi/services/network/metered_network_service.dart';
-import 'package:kazumi/services/network/ech_http_licenses.dart';
-import 'package:kazumi/services/network/proxy_manager.dart';
-import 'package:kazumi/services/network/system_proxy_service.dart';
+import 'package:kazutv/services/network/metered_network_service.dart';
+import 'package:kazutv/services/network/ech_http_licenses.dart';
+import 'package:kazutv/services/network/proxy_manager.dart';
+import 'package:kazutv/services/network/system_proxy_service.dart';
 import 'package:flutter/services.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:window_manager/window_manager.dart';
-import 'package:kazumi/pages/error/storage_error_page.dart';
+import 'package:kazutv/pages/error/storage_error_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:kazumi/utils/device.dart';
-import 'package:kazumi/services/platform/desktop_window_config.dart';
-import 'package:kazumi/services/platform/webview_feature_service.dart';
-import 'package:kazumi/bean/dialog/dialog_helper.dart';
-import 'package:kazumi/navigation.dart';
+import 'package:kazutv/utils/device.dart';
+import 'package:kazutv/services/platform/desktop_window_config.dart';
+import 'package:kazutv/services/platform/webview_feature_service.dart';
+import 'package:kazutv/bean/dialog/dialog_helper.dart';
+import 'package:kazutv/navigation.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -81,7 +81,7 @@ void main() async {
           ? TitleBarStyle.hidden
           : TitleBarStyle.normal,
       windowButtonVisibility: showWindowButton,
-      title: 'Kazumi',
+      title: 'Kazutv',
     );
     windowManager.waitUntilReadyToShow(windowOptions, () async {
       // window_manager controls desktop visibility to avoid startup flicker.

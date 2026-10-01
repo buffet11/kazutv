@@ -1,11 +1,11 @@
-import 'package:kazumi/modules/download/download_module.dart';
-import 'package:kazumi/modules/history/history_module.dart';
-import 'package:kazumi/pages/download/download_controller.dart';
-import 'package:kazumi/pages/video/video_playback_args.dart';
-import 'package:kazumi/plugins/plugins.dart';
-import 'package:kazumi/plugins/plugins_controller.dart';
-import 'package:kazumi/services/logging/logger.dart';
-import 'package:kazumi/services/plugin/rule_engine_models.dart'
+import 'package:kazutv/modules/download/download_module.dart';
+import 'package:kazutv/modules/history/history_module.dart';
+import 'package:kazutv/pages/download/download_controller.dart';
+import 'package:kazutv/pages/video/video_playback_args.dart';
+import 'package:kazutv/plugins/plugins.dart';
+import 'package:kazutv/plugins/plugins_controller.dart';
+import 'package:kazutv/services/logging/logger.dart';
+import 'package:kazutv/services/plugin/rule_engine_models.dart'
     show RuleCancelToken;
 
 sealed class HistoryPlaybackResult {

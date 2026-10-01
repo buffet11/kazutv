@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kazumi/bean/card/network_img_layer.dart';
-import 'package:kazumi/bean/widget/loading_indicator.dart';
-import 'package:kazumi/modules/collect/collect_type.dart';
-import 'package:kazumi/modules/history/history_module.dart';
+import 'package:kazutv/bean/card/network_img_layer.dart';
+import 'package:kazutv/bean/widget/loading_indicator.dart';
+import 'package:kazutv/modules/collect/collect_type.dart';
+import 'package:kazutv/modules/history/history_module.dart';
 
 class HistoryRecordTile extends StatelessWidget {
   const HistoryRecordTile({

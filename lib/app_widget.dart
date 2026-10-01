@@ -4,18 +4,18 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
-import 'package:kazumi/services/storage/storage.dart';
+import 'package:kazutv/services/storage/storage.dart';
 import 'package:tray_manager/tray_manager.dart';
-import 'package:kazumi/services/logging/logger.dart';
-import 'package:kazumi/services/network/metered_network_service.dart';
+import 'package:kazutv/services/logging/logger.dart';
+import 'package:kazutv/services/network/metered_network_service.dart';
 import 'package:window_manager/window_manager.dart';
-import 'package:kazumi/bean/dialog/dialog_helper.dart';
-import 'package:kazumi/bean/dialog/exit_confirmation_dialog.dart';
-import 'package:kazumi/bean/settings/theme_provider.dart';
-import 'package:kazumi/navigation.dart';
-import 'package:kazumi/utils/constants.dart';
-import 'package:kazumi/utils/device.dart';
-import 'package:kazumi/utils/theme.dart';
+import 'package:kazutv/bean/dialog/dialog_helper.dart';
+import 'package:kazutv/bean/dialog/exit_confirmation_dialog.dart';
+import 'package:kazutv/bean/settings/theme_provider.dart';
+import 'package:kazutv/navigation.dart';
+import 'package:kazutv/utils/constants.dart';
+import 'package:kazutv/utils/device.dart';
+import 'package:kazutv/utils/theme.dart';
 
 class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
@@ -257,19 +257,19 @@ class _AppWidgetState extends State<AppWidget>
       await trayManager.setIcon('assets/images/logo/logo_lanczos.ico');
     } else if (Platform.environment.containsKey('FLATPAK_ID') ||
         Platform.environment.containsKey('SNAP')) {
-      await trayManager.setIcon('io.github.Predidit.Kazumi');
+      await trayManager.setIcon('io.github.buffet11.kazutv');
     } else {
       await trayManager.setIcon('assets/images/logo/logo_rounded.png');
     }
 
     if (!Platform.isLinux) {
-      await trayManager.setToolTip('Kazumi');
+      await trayManager.setToolTip('Kazutv');
     }
 
     Menu trayMenu = Menu(items: [
       MenuItem(key: 'show_window', label: '显示窗口'),
       MenuItem.separator(),
-      MenuItem(key: 'exit', label: '退出 Kazumi')
+      MenuItem(key: 'exit', label: '退出 Kazutv')
     ]);
     await trayManager.setContextMenu(trayMenu);
   }
@@ -302,7 +302,7 @@ class _AppWidgetState extends State<AppWidget>
             : dynamicDarkTheme;
 
         return MaterialApp.router(
-          title: "Kazumi",
+          title: "Kazutv",
           localizationsDelegates: GlobalMaterialLocalizations.delegates,
           supportedLocales: const [
             Locale.fromSubtags(

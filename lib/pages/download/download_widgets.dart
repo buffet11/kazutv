@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:kazumi/bean/card/network_img_layer.dart';
-import 'package:kazumi/bean/card/rule_card.dart';
-import 'package:kazumi/bean/widget/loading_indicator.dart';
-import 'package:kazumi/modules/download/download_module.dart';
-import 'package:kazumi/utils/format.dart';
+import 'package:kazutv/bean/card/network_img_layer.dart';
+import 'package:kazutv/bean/card/rule_card.dart';
+import 'package:kazutv/bean/widget/loading_indicator.dart';
+import 'package:kazutv/modules/download/download_module.dart';
+import 'package:kazutv/utils/format.dart';
 
 const Duration _kExpandDuration = Duration(milliseconds: 250);
 const Curve _kExpandCurve = Curves.easeInOutCubic;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:kazumi/request/config/api_endpoints.dart';
+import 'package:kazutv/request/config/api_endpoints.dart';
 
 class StyleString {
   static const double cardSpace = 8;
@@ -87,7 +87,7 @@ const List<String> acceptLanguageList = [
 /// Bangumi API 文档要求的UA格式
 Map<String, String> bangumiHTTPHeader = {
   'user-agent':
-      'Predidit/Kazumi/${ApiEndpoints.version} (Android) (https://github.com/Predidit/Kazumi)',
+      'Kazutv/${ApiEndpoints.version} (https://github.com/buffet11/kazutv)',
   'referer': '',
   'content-type': 'application/json'
 };

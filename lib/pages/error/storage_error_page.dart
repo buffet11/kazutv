@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'package:kazumi/bean/widget/error_widget.dart';
-import 'package:kazumi/bean/widget/loading_indicator.dart';
-import 'package:kazumi/bean/widget/state_presentation.dart';
+import 'package:kazutv/bean/widget/error_widget.dart';
+import 'package:kazutv/bean/widget/loading_indicator.dart';
+import 'package:kazutv/bean/widget/state_presentation.dart';
 
 class StorageErrorPage extends StatelessWidget {
   const StorageErrorPage({super.key});

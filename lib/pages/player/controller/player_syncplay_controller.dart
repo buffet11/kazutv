@@ -2,13 +2,13 @@
 
 import 'dart:async';
 
-import 'package:kazumi/bean/dialog/dialog_helper.dart';
-import 'package:kazumi/pages/player/controller/player_models.dart';
-import 'package:kazumi/services/logging/logger.dart';
-import 'package:kazumi/services/storage/storage.dart';
-import 'package:kazumi/services/player/syncplay_client.dart';
-import 'package:kazumi/services/player/syncplay_endpoint.dart';
-import 'package:kazumi/utils/async_session.dart';
+import 'package:kazutv/bean/dialog/dialog_helper.dart';
+import 'package:kazutv/pages/player/controller/player_models.dart';
+import 'package:kazutv/services/logging/logger.dart';
+import 'package:kazutv/services/storage/storage.dart';
+import 'package:kazutv/services/player/syncplay_client.dart';
+import 'package:kazutv/services/player/syncplay_endpoint.dart';
+import 'package:kazutv/utils/async_session.dart';
 import 'package:mobx/mobx.dart';
 
 part 'player_syncplay_controller.g.dart';

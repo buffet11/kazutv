@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:kazumi/bean/dialog/dialog_helper.dart';
-import 'package:kazumi/bean/settings/settings_list.dart';
-import 'package:kazumi/bean/widget/split_list_row.dart';
-import 'package:kazumi/services/network/metered_network_service.dart';
-import 'package:kazumi/services/player/low_memory_mode.dart';
+import 'package:kazutv/bean/dialog/dialog_helper.dart';
+import 'package:kazutv/bean/settings/settings_list.dart';
+import 'package:kazutv/bean/widget/split_list_row.dart';
+import 'package:kazutv/services/network/metered_network_service.dart';
+import 'package:kazutv/services/player/low_memory_mode.dart';
 
 class LowMemoryModeSettingsTile extends StatelessWidget {
   const LowMemoryModeSettingsTile({super.key});

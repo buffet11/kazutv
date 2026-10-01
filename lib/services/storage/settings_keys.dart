@@ -1,4 +1,4 @@
-import 'package:kazumi/services/player/syncplay_endpoint.dart';
+import 'package:kazutv/services/player/syncplay_endpoint.dart';
 
 enum SettingGroup {
   player,

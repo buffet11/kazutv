@@ -2,12 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:kazumi/bean/dialog/dialog_helper.dart';
-import 'package:kazumi/bean/widget/loading_indicator.dart';
-import 'package:kazumi/bean/widget/state_presentation.dart';
-import 'package:kazumi/modules/bangumi/bangumi_item.dart';
-import 'package:kazumi/modules/bangumi/bangumi_review.dart';
-import 'package:kazumi/services/logging/logger.dart';
+import 'package:kazutv/bean/dialog/dialog_helper.dart';
+import 'package:kazutv/bean/widget/loading_indicator.dart';
+import 'package:kazutv/bean/widget/state_presentation.dart';
+import 'package:kazutv/modules/bangumi/bangumi_item.dart';
+import 'package:kazutv/modules/bangumi/bangumi_review.dart';
+import 'package:kazutv/services/logging/logger.dart';
 
 class RatingReviewDialog extends StatefulWidget {
   const RatingReviewDialog({

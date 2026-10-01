@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'package:kazumi/bean/appbar/sys_app_bar.dart';
-import 'package:kazumi/pages/menu/route_visibility.dart';
-import 'package:kazumi/pages/my/my_controller.dart';
-import 'package:kazumi/pages/my/my_space_view.dart';
+import 'package:kazutv/bean/appbar/sys_app_bar.dart';
+import 'package:kazutv/pages/menu/route_visibility.dart';
+import 'package:kazutv/pages/my/my_controller.dart';
+import 'package:kazutv/pages/my/my_space_view.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({super.key, required this.controller});

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'package:kazumi/bean/settings/settings_detail_scaffold.dart';
-import 'package:kazumi/bean/widget/state_presentation.dart';
-import 'package:kazumi/pages/settings/sync/sync_settings_widgets.dart';
-import 'package:kazumi/services/storage/storage.dart';
-import 'package:kazumi/services/sync/bangumi_sync_service.dart';
+import 'package:kazutv/bean/settings/settings_detail_scaffold.dart';
+import 'package:kazutv/bean/widget/state_presentation.dart';
+import 'package:kazutv/pages/settings/sync/sync_settings_widgets.dart';
+import 'package:kazutv/services/storage/storage.dart';
+import 'package:kazutv/services/sync/bangumi_sync_service.dart';
 
 enum _SyncStatus {
   unconnected('未连接', Icons.link_off_rounded),

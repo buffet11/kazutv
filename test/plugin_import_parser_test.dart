@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kazumi/plugins/plugins.dart';
-import 'package:kazumi/plugins/plugins_controller.dart';
-import 'package:kazumi/services/plugin/plugin_import_parser.dart';
-import 'package:kazumi/utils/encoding.dart';
+import 'package:kazutv/plugins/plugins.dart';
+import 'package:kazutv/plugins/plugins_controller.dart';
+import 'package:kazutv/services/plugin/plugin_import_parser.dart';
+import 'package:kazutv/utils/encoding.dart';
 
 void main() {
   Plugin plugin(String name) {

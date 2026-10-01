@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:kazumi/bean/widget/loading_indicator.dart';
-import 'package:kazumi/bean/widget/state_presentation.dart';
-import 'package:kazumi/modules/bangumi/sync_priority.dart';
-import 'package:kazumi/modules/collect/collect_sync_plan.dart';
+import 'package:kazutv/bean/widget/loading_indicator.dart';
+import 'package:kazutv/bean/widget/state_presentation.dart';
+import 'package:kazutv/modules/bangumi/sync_priority.dart';
+import 'package:kazutv/modules/collect/collect_sync_plan.dart';
 
 enum CollectSyncDestination { webDavSettings, bangumiSettings }
 

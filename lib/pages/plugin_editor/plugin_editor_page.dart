@@ -3,16 +3,16 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'package:kazumi/bean/settings/settings_detail_scaffold.dart';
-import 'package:kazumi/bean/widget/loading_indicator.dart';
-import 'package:kazumi/pages/plugin_editor/rule_management_widgets.dart';
-import 'package:kazumi/pages/plugin_editor/editor_form_widgets.dart';
-import 'package:kazumi/plugins/anti_crawler_config.dart';
-import 'package:kazumi/plugins/api_rule_config.dart';
-import 'package:kazumi/plugins/plugins.dart';
-import 'package:kazumi/plugins/plugins_controller.dart';
-import 'package:kazumi/request/config/api_endpoints.dart';
-import 'package:kazumi/services/plugin/api_rule_engine.dart';
+import 'package:kazutv/bean/settings/settings_detail_scaffold.dart';
+import 'package:kazutv/bean/widget/loading_indicator.dart';
+import 'package:kazutv/pages/plugin_editor/rule_management_widgets.dart';
+import 'package:kazutv/pages/plugin_editor/editor_form_widgets.dart';
+import 'package:kazutv/plugins/anti_crawler_config.dart';
+import 'package:kazutv/plugins/api_rule_config.dart';
+import 'package:kazutv/plugins/plugins.dart';
+import 'package:kazutv/plugins/plugins_controller.dart';
+import 'package:kazutv/request/config/api_endpoints.dart';
+import 'package:kazutv/services/plugin/api_rule_engine.dart';
 
 abstract final class _RuleEditorText {
   static const pageTitle = '规则编辑器';

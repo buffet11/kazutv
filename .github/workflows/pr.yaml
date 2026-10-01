@@ -1,19 +1,10 @@
 ---
     name: "PR workflow"
 
+    # ⚠️ 本文件继承自上游 Kazumi，依赖上游的 CI 凭据（上游 AppId、Android 签名密钥等），
+    # 本项目均未配置。因此已关闭自动触发（原为 pull_request）。
+    # 待本项目配好自有的 secrets 后再放开，或改写成本项目自己的 CI。
     on:
-      pull_request:
-        types:
-          - opened
-          - synchronize
-          - reopened
-          - ready_for_review
-        paths-ignore:
-          - 'static/**'
-          - '**.md'
-          - '.gitignore'
-          - '.github/ISSUE_TEMPLATE/**'
-          - 'fastlane/**'
       workflow_dispatch:
         inputs:
           logLevel:

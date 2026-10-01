@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:audio_session/audio_session.dart';
 import 'package:audio_service/audio_service.dart';
 import 'package:audio_service_mpris/audio_service_mpris.dart';
-import 'package:kazumi/services/logging/logger.dart';
-import 'package:kazumi/services/network/proxy_aware_image_cache_manager.dart';
-import 'package:kazumi/utils/async_session.dart';
+import 'package:kazutv/services/logging/logger.dart';
+import 'package:kazutv/services/network/proxy_aware_image_cache_manager.dart';
+import 'package:kazutv/utils/async_session.dart';
 
 typedef AudioCallback = Future<void> Function();
 typedef AudioSeekCallback = Future<void> Function(Duration position);
@@ -37,8 +37,8 @@ class AudioController {
     late _KazumiAudioHandler rawHandler;
     if (Platform.isLinux) {
       AudioServiceMpris.init(
-        dBusName: 'io.github.Predidit.Kazumi.channel.audio',
-        identity: 'Kazumi Playback',
+        dBusName: 'io.github.buffet11.kazutv.channel.audio',
+        identity: 'Kazutv Playback',
         canControl: true,
         canPlay: true,
         canPause: true,
@@ -52,8 +52,8 @@ class AudioController {
         return rawHandler;
       },
       config: const AudioServiceConfig(
-        androidNotificationChannelId: 'io.github.Predidit.Kazumi.channel.audio',
-        androidNotificationChannelName: 'Kazumi Playback',
+        androidNotificationChannelId: 'io.github.buffet11.kazutv.channel.audio',
+        androidNotificationChannelName: 'Kazutv Playback',
         androidNotificationOngoing: true,
       ),
     );

@@ -1,24 +1,24 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:kazumi/bean/dialog/dialog_helper.dart';
-import 'package:kazumi/pages/my/my_controller.dart';
-import 'package:kazumi/services/sync/bangumi_sync_service.dart';
-import 'package:kazumi/services/sync/danmaku_shield_sync_service.dart';
-import 'package:kazumi/services/sync/webdav.dart';
-import 'package:kazumi/services/storage/storage.dart';
-import 'package:kazumi/plugins/plugins_controller.dart';
+import 'package:kazutv/bean/dialog/dialog_helper.dart';
+import 'package:kazutv/pages/my/my_controller.dart';
+import 'package:kazutv/services/sync/bangumi_sync_service.dart';
+import 'package:kazutv/services/sync/danmaku_shield_sync_service.dart';
+import 'package:kazutv/services/sync/webdav.dart';
+import 'package:kazutv/services/storage/storage.dart';
+import 'package:kazutv/plugins/plugins_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:kazumi/pages/collect/collect_controller.dart';
-import 'package:kazumi/services/logging/logger.dart';
-import 'package:kazumi/services/shaders/shader_asset_service.dart';
-import 'package:kazumi/pages/download/download_controller.dart';
-import 'package:kazumi/pages/plugin_editor/plugin_update_actions.dart';
-import 'package:kazumi/services/download/background_download_service.dart';
-import 'package:kazumi/services/platform/windows_shortcut.dart';
-import 'package:kazumi/services/platform/platform_environment_service.dart';
-import 'package:kazumi/services/update/startup_update_check.dart';
-import 'package:kazumi/navigation.dart';
+import 'package:kazutv/pages/collect/collect_controller.dart';
+import 'package:kazutv/services/logging/logger.dart';
+import 'package:kazutv/services/shaders/shader_asset_service.dart';
+import 'package:kazutv/pages/download/download_controller.dart';
+import 'package:kazutv/pages/plugin_editor/plugin_update_actions.dart';
+import 'package:kazutv/services/download/background_download_service.dart';
+import 'package:kazutv/services/platform/windows_shortcut.dart';
+import 'package:kazutv/services/platform/platform_environment_service.dart';
+import 'package:kazutv/services/update/startup_update_check.dart';
+import 'package:kazutv/navigation.dart';
 
 class InitPage extends StatefulWidget {
   const InitPage({
@@ -230,7 +230,7 @@ class _InitPageState extends State<InitPage> {
             child: AlertDialog(
               title: const Text('X11环境检测'),
               content: const Text(
-                  '检测到您当前运行在X11环境下，Kazumi在X11环境下可能出现性能问题或界面异常，建议切换到Wayland以获得更好的体验。您是否希望在X11下继续使用Kazumi？'),
+                  '检测到您当前运行在X11环境下，Kazutv在X11环境下可能出现性能问题或界面异常，建议切换到Wayland以获得更好的体验。您是否希望在X11下继续使用Kazutv？'),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -266,7 +266,7 @@ class _InitPageState extends State<InitPage> {
       clickMaskDismiss: false,
       builder: (context) => AlertDialog(
         title: const Text('创建桌面快捷方式'),
-        content: const Text('是否在桌面创建 Kazumi 的快捷方式？'),
+        content: const Text('是否在桌面创建 Kazutv 的快捷方式？'),
         actions: [
           TextButton(
             onPressed: () => KazumiDialog.dismiss(popWith: false),

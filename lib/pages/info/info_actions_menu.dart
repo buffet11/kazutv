@@ -4,10 +4,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kazumi/bean/dialog/dialog.dart';
-import 'package:kazumi/modules/bangumi/bangumi_item.dart';
-import 'package:kazumi/services/logging/logger.dart';
-import 'package:kazumi/utils/device.dart';
+import 'package:kazutv/bean/dialog/dialog.dart';
+import 'package:kazutv/modules/bangumi/bangumi_item.dart';
+import 'package:kazutv/services/logging/logger.dart';
+import 'package:kazutv/utils/device.dart';
 import 'package:saver_gallery/saver_gallery.dart';
 import 'package:url_launcher/url_launcher.dart';
 

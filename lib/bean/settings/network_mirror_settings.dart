@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:kazumi/bean/dialog/dialog_helper.dart';
-import 'package:kazumi/bean/settings/settings_list.dart';
-import 'package:kazumi/services/network/bangumi_acceleration.dart';
-import 'package:kazumi/services/network/image_acceleration.dart';
-import 'package:kazumi/services/storage/storage.dart';
+import 'package:kazutv/bean/dialog/dialog_helper.dart';
+import 'package:kazutv/bean/settings/settings_list.dart';
+import 'package:kazutv/services/network/bangumi_acceleration.dart';
+import 'package:kazutv/services/network/image_acceleration.dart';
+import 'package:kazutv/services/storage/storage.dart';
 
 class NetworkMirrorSettings extends StatefulWidget {
   const NetworkMirrorSettings({super.key, this.margin});

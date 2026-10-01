@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:webview_windows/webview_windows.dart';
-import 'package:kazumi/services/logging/logger.dart';
-import 'package:kazumi/services/storage/storage.dart';
-import 'package:kazumi/services/network/proxy_utils.dart';
-import 'package:kazumi/webview/captcha/captcha_webview_controller.dart';
+import 'package:kazutv/services/logging/logger.dart';
+import 'package:kazutv/services/storage/storage.dart';
+import 'package:kazutv/services/network/proxy_utils.dart';
+import 'package:kazutv/webview/captcha/captcha_webview_controller.dart';
 
 class CaptchaWebviewWindowsImpl
     extends CaptchaWebviewController<WebviewController> {
