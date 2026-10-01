@@ -72,7 +72,7 @@ class _ThemeSettingsPageState extends State<ThemeSettingsPage> {
         useMaterial3: true,
         fontFamily: themeProvider.currentFontFamily,
         brightness: Brightness.dark,
-        colorSchemeSeed: Colors.green,
+        colorSchemeSeed: const Color(0xff5566e8),
         progressIndicatorTheme: progressIndicatorTheme2024,
         sliderTheme: sliderTheme2024,
         pageTransitionsTheme: pageTransitionsTheme2024);
@@ -82,7 +82,7 @@ class _ThemeSettingsPageState extends State<ThemeSettingsPage> {
           useMaterial3: true,
           fontFamily: themeProvider.currentFontFamily,
           brightness: Brightness.light,
-          colorSchemeSeed: Colors.green,
+          colorSchemeSeed: const Color(0xff5566e8),
           progressIndicatorTheme: progressIndicatorTheme2024,
           sliderTheme: sliderTheme2024,
           pageTransitionsTheme: pageTransitionsTheme2024),
@@ -118,7 +118,7 @@ class _ThemeSettingsPageState extends State<ThemeSettingsPage> {
     dynamic color;
     oledEnhance = GStorage.getSetting(SettingsKeys.oledEnhance);
     if (defaultThemeColor == 'default') {
-      color = Colors.green;
+      color = const Color(0xff5566e8);
     } else {
       color = Color(int.parse(defaultThemeColor, radix: 16));
     }
@@ -320,7 +320,7 @@ class _ThemeSettingsPageState extends State<ThemeSettingsPage> {
                   themeProvider.setFontFamily(useSystemFont);
                   dynamic color;
                   if (defaultThemeColor == 'default') {
-                    color = Colors.green;
+                    color = const Color(0xff5566e8);
                   } else {
                     color = Color(int.parse(defaultThemeColor, radix: 16));
                   }
