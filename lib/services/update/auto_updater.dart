@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:kazumi/bean/dialog/dialog_helper.dart';
 import 'package:kazumi/request/clients/download_http_client.dart';
 import 'package:kazumi/request/config/api_endpoints.dart';
+import 'package:kazumi/request/core/network_exception.dart';
 import 'package:kazumi/services/logging/logger.dart';
 import 'package:kazumi/services/storage/storage.dart';
 import 'package:open_filex/open_filex.dart';
@@ -129,8 +130,18 @@ class AutoUpdater {
   }
 
   Future<UpdateInfo?> checkForUpdates() async {
+    // 本分支尚未发布自己的 release 时不查更新：
+    // 上游的更新源不能复用（会把用户引导去下载原版 Kazumi）。
+    if (!ApiEndpoints.updateChannelReady) {
+      return null;
+    }
     try {
       final data = await _latestRelease();
+
+      if (data.isEmpty) {
+        // 仓库存在但还没有 release（GitHub 返回 404）。不算错误。
+        return null;
+      }
 
       if (!data.containsKey('tag_name')) {
         throw Exception('无效的响应数据');
@@ -162,12 +173,21 @@ class AutoUpdater {
   }
 
   Future<Map<String, dynamic>> _latestRelease() async {
-    final raw = await _downloadClient.getPlain(ApiEndpoints.latestAppMirror);
-    final data = json.decode(raw);
-    if (data is! Map) {
-      throw Exception('Invalid update response');
+    try {
+      final raw = await _downloadClient.getPlain(ApiEndpoints.latestAppMirror);
+      final data = json.decode(raw);
+      if (data is! Map) {
+        throw Exception('Invalid update response');
+      }
+      return Map<String, dynamic>.from(data);
+    } on NetworkException catch (e) {
+      // GitHub 在仓库尚无 release 时返回 404。
+      // 这种情况当成"暂无可用版本"，而不是抛错让上层弹"检查更新失败"。
+      if (e.statusCode == 404) {
+        return <String, dynamic>{};
+      }
+      rethrow;
     }
-    return Map<String, dynamic>.from(data);
   }
 
   Future<void> autoCheckForUpdates() async {
@@ -185,6 +205,11 @@ class AutoUpdater {
   }
 
   Future<void> manualCheckForUpdates() async {
+    if (!ApiEndpoints.updateChannelReady) {
+      KazumiDialog.showToast(
+          message: 'Kazutv 暂未开放在线更新，请到项目仓库获取新版本');
+      return;
+    }
     try {
       final updateInfo = await checkForUpdates();
       if (updateInfo != null) {

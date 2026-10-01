@@ -8,10 +8,10 @@ class ApiEndpoints {
   static const int apiLevel = 8;
 
   /// 项目主页
-  static const String projectUrl = "https://kazumi.app/";
+  static const String projectUrl = "https://github.com/buffet11/kazutv";
 
   /// Github 项目主页
-  static const String sourceUrl = "https://github.com/Predidit/Kazumi";
+  static const String sourceUrl = "https://github.com/buffet11/kazutv";
 
   /// 图标作者
   static const String iconUrl = "https://www.pixiv.net/users/66219277";
@@ -25,15 +25,28 @@ class ApiEndpoints {
       'https://raw.gitcode.com/gh_mirrors/ka/KazumiRules/raw/main/';
 
   /// 在线升级
+  ///
+  /// ⚠️ 二开注意：这里**必须**指向本分支自己的 release。
+  /// 上游 Kazumi 的更新源（releases/latest + api.kazumi.fyi 镜像后端）返回的是
+  /// Kazumi 的版本号，而本分支版本独立编号（从 0.1.0 起）。
+  /// 一旦沿用上游源，`needUpdate()` 会拿 0.1.0 去比 2.3.7 判定"有新版本"，
+  /// 然后把用户引导去下载**原版 Kazumi**，等于覆盖掉本分支。
   static const String latestApp =
-      'https://api.github.com/repos/Predidit/Kazumi/releases/latest';
+      'https://api.github.com/repos/buffet11/kazutv/releases/latest';
+
+  /// 更新检查地址。
+  /// 本分支暂无自建镜像后端，直接走 GitHub Release API。
+  static const String latestAppMirror = latestApp;
+
+  /// 本分支是否已经开始发布版本。
+  ///
+  /// 为 false 时：不做自动检查，手动检查给出明确提示，
+  /// 而不是因为 GitHub 上还没有 release（404）而报"检查更新失败"。
+  /// 开始发版后把这里改成 true，并同步维护上面的仓库地址。
+  static const bool updateChannelReady = false;
 
   /// Bangumi 镜像测试后端
   static const String bangumiMirrorDomain = 'https://api.kazumi.fyi';
-
-  /// Kazumi 镜像后端应用更新
-  static const String latestAppMirror =
-      '$bangumiMirrorDomain/kazumi/v1/app/latest';
 
   /// 弹弹官网
   static const String dandanIndex = 'https://www.dandanplay.com/';

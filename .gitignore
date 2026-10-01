@@ -71,6 +71,13 @@ android/key.properties
 .env.*
 **/dand*credentials*.local.dart
 
+# 本地构建凭据文件。.vscode/launch.json 用 --dart-define-from-file 读它，
+# 里面会放弹幕 AppId/AppSecret。上游 .gitignore 的 .env / .env.* 匹配不到这种命名
+# （文件以 .kazumi 开头，不是 .env 开头），所以必须显式排除。
+.kazumi_build_defines.env
+.kazutv_build_defines.env
+*_build_defines.env
+
 # 本地临时笔记
 *.local.md
 /AI笔记/
