@@ -1,113 +1,80 @@
 # Kazutv
 
-> 一个把「看番」和「看电影」合在一起的跨平台视频播放器
+> 番剧 + 影视，一个播放器
 
-Kazutv 是开源项目 [**Kazumi**](https://github.com/Predidit/Kazumi) 的**二次开发分支**。
-它保留上游的番剧采集、播放与弹幕能力，在其之上新增影视内容（电影 / 剧集 / 综艺）聚合播放，
-并对弹幕的自动匹配能力做了增强。
+Kazutv 是 [**Kazumi**](https://github.com/Predidit/Kazumi) 的二次开发分支。保留上游的番剧采集、
+播放与弹幕能力，在其之上新增影视（电影 / 剧集 / 综艺）聚合播放，并增强弹幕的自动匹配。
 
-> ### 关于本仓库的性质（重要）
->
-> 本仓库是 Kazumi 的**修改版本**，并非官方版本，与上游作者无隶属关系。
-> 修改起始日期：**2026-10-01**。
-> 依据 GNU GPL-3.0 第 5(a) 条，在此声明本作品已被修改。
-> 上游项目：<https://github.com/Predidit/Kazumi>
->
-> 许可证、致谢与第三方说明见 [LICENSE](LICENSE) 与 [NOTICE.md](NOTICE.md)。
+> **本仓库是 Kazumi 的修改版本，非官方版本，与上游作者无隶属关系。**
+> 修改起始日期 **2026-10-01**（依 GPL-3.0 §5(a) 声明本作品已被修改）。
+> 许可证与致谢见 [LICENSE](LICENSE)、[NOTICE.md](NOTICE.md)。
 
----
+## 状态
 
-## 当前状态
-
-**早期开发中。** 本仓库目前处于「二开起点」阶段——以上游 Kazumi 源码为基础，
-二开功能正在实现中。下方功能表中未勾选的即为尚未实现的部分。
+早期开发中 —— 基于上游源码起步，二开功能实现中。下表未勾选的即尚未实现。
 
 ## 功能
 
-### 继承自上游 Kazumi
+**继承自上游**：XPath 规则番剧采集与播放、弹幕（[弹弹play](https://doc.dandanplay.net/open/)）、
+规则编辑器与规则商店、离线下载、观看历史、追番收藏、WebDAV 同步、DLNA 投屏、
+一起看（SyncPlay）、Anime4K 实时超分。
 
-- 基于自定义 XPath 规则的番剧采集与在线播放
-- 弹幕（基于 [弹弹play 开放弹幕网络](https://doc.dandanplay.net/open/)）
-- 规则编辑器、规则导入导出与规则商店
-- 离线下载、观看历史、追番收藏
-- WebDAV 数据同步、DLNA 投屏、一起看（SyncPlay）
-- 基于 Anime4K 的实时超分辨率
+**二开新增（规划中）**：
 
-### 二开新增（规划中）
-
-- [ ] 影视模块：电影 / 剧集 / 综艺聚合搜索与播放（苹果CMS 协议）
-- [ ] 自定义影视源管理：增删改、启用停用、探活测速
-- [ ] 影视源订阅导入导出（兼容 LibreTV-SourceList 与 TVBOX 配置格式）
-- [ ] 影视弹幕**自动检索 + 自动加载**（带独立开关，默认关闭）
+- [ ] 影视模块：苹果CMS 协议的电影 / 剧集 / 综艺聚合搜索与播放
+- [ ] 自定义影视源管理：增删改、启用停用、探活测速、订阅导入导出
+- [ ] 影视弹幕**自动检索 + 自动加载**（独立开关，默认关闭）
 - [ ] 弹幕匹配纠错：手动指定后记住选择，下次直接命中
 - [ ] 影视收藏与观看历史续播
 
-详细的架构设计见 [`docs/Kazutv-融合设计方案.md`](docs/Kazutv-融合设计方案.md)。
+设计细节见 [`docs/Kazutv-融合设计方案.md`](docs/Kazutv-融合设计方案.md)。
 
-## 支持平台
+## 平台
 
-- Android 10 及以上
-- Windows 10 及以上
-- macOS 10.15 及以上
-- Linux（实验性）
-- iOS 13 及以上（需[侧载](https://kazumi.app/docs/misc/how-to-install-in-ios)）
-
-> HarmonyOS 5.0+ 的支持位于上游的[分支仓库](https://github.com/ErBWs/Kazumi)，
-> 本分支暂未覆盖。
+Android 10+ · Windows 10+ · macOS 10.15+ · Linux（实验性）· iOS 13+（需侧载）
 
 ## 构建
 
-需要 Flutter SDK **3.47.5** 或更高版本。
+需要 Flutter **3.47.5** 及以上，以及 Visual Studio（含 C++ 桌面开发工作负载）。
 
 ```bash
 flutter pub get
 dart run build_runner build --delete-conflicting-outputs   # 生成 MobX / Hive 代码
-
-flutter build windows        # Windows 桌面
-flutter build apk            # Android（可加 --split-per-abi）
+flutter build windows                                      # 或 flutter build apk --split-per-abi
 ```
 
-国内网络建议先配置镜像，可显著加快依赖拉取：
+Windows 下可直接双击 **`build.bat`**，它会依次完成上面三步并打印产物路径。
+`tools/` 里另有两个小工具：`hooks_prebuilt.py` 用于预置 native assets 钩子需要下载的
+预编译包（国内直连会超时或龟速），`check_pipe_support.py` 用于自检运行环境。
 
-```bash
-export PUB_HOSTED_URL=https://pub.flutter-io.cn
-export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
-```
+国内网络建议把 `PUB_HOSTED_URL`、`FLUTTER_STORAGE_BASE_URL` 指向 `*.flutter-io.cn` 镜像，
+可显著加快依赖拉取。
 
-### 弹幕服务凭据
+### 弹幕凭据
 
-本项目使用弹弹play 开放弹幕网络。**该服务需要 AppId / AppSecret 签名，未配置时弹幕将不可用。**
-
-请前往[弹弹play 开放弹幕网络开发者中心](https://dev.dandanplay.com)申请自己的凭据（免费，需审核），
-然后在构建时注入：
+弹弹play 的接口需要 AppId / AppSecret 签名，**未配置时弹幕不可用**。
+到[开发者中心](https://dev.dandanplay.com)免费申请（需审核），构建时注入：
 
 ```bash
 flutter build windows \
-  --dart-define=DANDANAPI_APPID=<你的 AppId> \
-  --dart-define=DANDANAPI_KEY=<你的 AppSecret>
+  --dart-define=DANDANAPI_APPID=<AppId> \
+  --dart-define=DANDANAPI_KEY=<AppSecret>
 ```
 
-> 凭据会被编译进客户端二进制，请勿将其提交到公开仓库。
+也可以把这两项写进项目根目录的 `.kazutv_build_defines.env`（模板见
+`.kazutv_build_defines.env.example`），`build.bat` 会自动读取。该文件已被 gitignore。
 
-## 免责声明
+> 凭据会被编译进客户端二进制，请勿提交到公开仓库。
 
-本项目仅供学习与技术研究使用。所有视频内容均来自第三方采集接口，本项目不存储、
-不制作、不托管任何视频内容，也不对第三方内容的合法性负责。
+## 免责与隐私
 
-使用本项目需遵守所在地法律法规，不得进行任何侵犯第三方知识产权的行为。
-因使用本项目而产生的数据和缓存应在 24 小时内清除，超出 24 小时的使用需获得相关权利人的授权。
-
-## 隐私
-
-不收集任何用户数据，不使用任何遥测组件。
-
-## 致谢
-
-上游 Kazumi 及其全部依赖的致谢名单见 [NOTICE.md](NOTICE.md)。
+仅供学习与技术研究。视频内容均来自第三方接口，本项目不存储、不制作、不托管任何内容，
+也不对第三方内容的合法性负责；使用时请遵守所在地法律法规，产生的缓存数据请在 24 小时内清除。
+不收集任何用户数据，不含遥测组件。
 
 ## 许可证
 
-[GNU General Public License v3.0](LICENSE)
+[GNU General Public License v3.0](LICENSE)。
 
-本作品包含基于 [LibreTV](https://github.com/LibreSpark/LibreTV)（AGPL-3.0）协议实现重写的代码，
+本作品包含基于 [LibreTV](https://github.com/LibreSpark/LibreTV)（AGPL-3.0）的协议实现重写代码，
 组合作品整体按 AGPL-3.0 发布。
