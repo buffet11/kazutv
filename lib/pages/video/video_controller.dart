@@ -123,6 +123,18 @@ abstract class _VideoPageController with Store implements Disposable {
   @observable
   bool isOfflineMode = false;
 
+  /// 影视播放参数。非空即表示当前这次播放来自影视源。
+  ///
+  /// 为什么不能只靠 [isOfflineMode] 二选一：影视既不是「番剧在线」（不需要
+  /// WebView 从网页里挖视频流），也不是「番剧离线」（不是本地文件），它有
+  /// 自己的换集路径 —— 苹果CMS 给的本来就是直链。
+  MovieVideoPlaybackArgs? _movieArgs;
+
+  bool get isMovieMode => _movieArgs != null;
+
+  /// 仅在 [isMovieMode] 为真时可读。
+  MovieVideoPlaybackArgs get movieArgs => _movieArgs!;
+
   PlaybackHistoryIdentity? _playbackHistoryIdentity;
   final Map<int, DownloadEpisode> _offlineEpisodesByNumber = {};
   final Map<int, int> _offlineDisplayRoadToOriginalRoad = {};
@@ -172,6 +184,8 @@ abstract class _VideoPageController with Store implements Disposable {
           road: args.road,
           downloadedEpisodes: args.downloadedEpisodes,
         );
+      case MovieVideoPlaybackArgs():
+        _initForMoviePlayback(args);
     }
   }
 
@@ -214,6 +228,77 @@ abstract class _VideoPageController with Store implements Disposable {
     }
     KazumiLogger().i(
         'VideoPageController: initialized for offline playback, episode $episodeNumber (position: ${selected.episode})');
+  }
+
+  /// 影视播放的初始化。
+  ///
+  /// 与番剧在线的区别：**不做 WebView 解析**（苹果CMS 给的 vod_play_url 本身
+  /// 就是 m3u8/mp4 直链）；不查历史、也不设 [_playbackHistoryIdentity] ——
+  /// 那个字段为 null 正好是「不写历史」的闸门（见 `player_item.dart` 里
+  /// `updateHistory` 的前置条件）。
+  void _initForMoviePlayback(MovieVideoPlaybackArgs args) {
+    _movieArgs = args;
+
+    // 播放器的画中画与信息面板会读 `videoPageController.bangumiItem`
+    // （封面 / 标题），而那个字段是 `late` —— 不赋值就是 LateInitializationError。
+    // 所以给影视造一个纯展示用的占位条目，正好显示片名和海报。
+    bangumiItem = _moviePlaceholderItem(args);
+
+    // currentPlugin 同样是 `late`，而播放器 UI 也在读它：
+    //   player_item.dart      -> OS 媒体面板的专辑名（currentPlugin.name）
+    //   player_item_panel.dart -> 投屏时传给接收端的 referer
+    // 用官方模板构造一个空壳，name 填来源源名（媒体面板上就显示「电影天堂」
+    // 这样的来处）。影视不跑任何插件规则，这个对象只承担展示。
+    currentPlugin = Plugin.fromTemplate()..name = args.sourceName;
+
+    title = args.movieName;
+    src = args.routeName;
+    isOfflineMode = false;
+    _loading = false;
+
+    // 复用 Road：data 放播放地址、identifier 放集名。这样
+    // _resolveOnlineEpisode / 剧集切换 / 自动连播 全部现成可用。
+    roadList.clear();
+    roadList.add(
+      Road(
+        name: args.routeName,
+        data: [for (final episode in args.episodes) episode.url],
+        identifier: [for (final episode in args.episodes) episode.title],
+      ),
+    );
+
+    final start = args.episodes.isEmpty
+        ? 0
+        : args.startIndex.clamp(0, args.episodes.length - 1);
+    resetEpisodeState(episode: start + 1, road: 0);
+
+    KazumiLogger().i(
+        'VideoPageController: initialized for movie playback, ${args.movieName} '
+        '(${args.routeName}), episode ${start + 1}/${args.episodes.length}');
+  }
+
+  /// 影视用的展示型占位 BangumiItem。
+  ///
+  /// `id: 0` 表示「不属于任何一部番剧」—— 弹幕与短评都按 id 查，0 查不到任何
+  /// 东西，正好是我们要的（影视的弹幕在后续阶段接匹配器，不走 id）。
+  static BangumiItem _moviePlaceholderItem(MovieVideoPlaybackArgs args) {
+    return BangumiItem(
+      id: 0,
+      type: 0,
+      name: args.movieName,
+      nameCn: args.movieName,
+      summary: '',
+      airDate: args.year,
+      airWeekday: 0,
+      rank: 0,
+      images: args.coverUrl.isEmpty ? const {} : {'large': args.coverUrl},
+      tags: const [],
+      alias: const [],
+      ratingScore: 0,
+      votes: 0,
+      votesCount: const [],
+      info: '',
+    );
   }
 
   void _buildOfflineRoadList(List<DownloadEpisode> episodes) {
@@ -446,6 +531,16 @@ abstract class _VideoPageController with Store implements Disposable {
       return;
     }
 
+    if (isMovieMode) {
+      await _changeMovieEpisode(
+        selection,
+        offset,
+        session: session,
+        playerController: playerController,
+      );
+      return;
+    }
+
     final resolvedEpisode = _resolveOnlineEpisode(episode, road: currentRoad);
     if (resolvedEpisode == null) {
       KazumiLogger().e(
@@ -584,6 +679,64 @@ abstract class _VideoPageController with Store implements Disposable {
     final episode =
         downloadRepository.getEpisode(bangumiId, pluginName, episodeNumber);
     return downloadManager.getLocalVideoPath(episode);
+  }
+
+  Future<void> _changeMovieEpisode(
+    VideoEpisodeSelection selection,
+    int offset, {
+    required AsyncSession session,
+    required PlayerController playerController,
+  }) async {
+    final args = _movieArgs!;
+    final resolvedEpisode =
+        _resolveOnlineEpisode(selection.episode, road: selection.road);
+    if (resolvedEpisode == null) {
+      KazumiLogger().e(
+          'VideoPageController: failed to resolve movie episode. road=${selection.road}, episode=${selection.episode}');
+      _failLoading('集数解析失败');
+      return;
+    }
+
+    // 影视不写历史：不设 _playbackHistoryIdentity，播放器侧就不会落盘。
+    _applyResolvedSelection(resolvedEpisode);
+    if (session.isStale) {
+      return;
+    }
+    _finishLoading();
+
+    KazumiLogger().i(
+        'VideoPageController: movie episode changed to ${resolvedEpisode.displayTitle}');
+
+    final params = PlaybackInitParams(
+      // 直链，直接交给播放器 —— 这是与番剧在线最大的不同
+      videoUrl: resolvedEpisode.pageUrl,
+      offset: offset,
+      isLocalPlayback: false,
+      bangumiId: bangumiItem.id,
+      // 空 pluginName = 没有可用的插件规则。弹幕与短评都依赖它，
+      // 影视的弹幕留到后续阶段用独立的匹配器接，这里先不给假的。
+      pluginName: '',
+      episode: resolvedEpisode.listIndex,
+      danmakuEpisodeNumber: resolvedEpisode.danmakuEpisodeNumber,
+      pageUrl: resolvedEpisode.pageUrl,
+      sortNumber: resolvedEpisode.sortNumber,
+      httpHeaders: const {},
+      adBlockerEnabled: false,
+      episodeTitle: resolvedEpisode.displayTitle,
+      referer: '',
+      currentRoad: resolvedEpisode.roadIndex,
+      coverUrl: args.coverUrl.isEmpty ? null : args.coverUrl,
+      bangumiName: args.movieName,
+    );
+
+    final initialized = await playerController.init(params);
+    if (session.isActive && initialized) {
+      playingEpisode = selection;
+      // 这里刻意不调 _loadPlaybackDanmaku：影视没有 Bangumi id，
+      // 弹幕自动匹配是后续阶段的事。
+    } else if (session.isActive) {
+      _playbackSessions.cancel();
+    }
   }
 
   Future<void> _resolveWithVideoSourceService(

@@ -11,6 +11,7 @@ import 'package:kazutv/modules/movie/movie_item.dart';
 import 'package:kazutv/modules/movie/movie_source.dart';
 import 'package:kazutv/pages/movie/movie_episode_grid.dart';
 import 'package:kazutv/pages/movie/movie_route_selector.dart';
+import 'package:kazutv/pages/video/video_playback_args.dart';
 import 'package:kazutv/request/apis/apple_cms_api.dart';
 import 'package:kazutv/services/movie/movie_source_manager.dart';
 
@@ -90,14 +91,52 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
     return routes[_routeIndex.clamp(0, routes.length - 1)];
   }
 
-  /// 播放。
+  /// 播放某一集。
   ///
-  /// P3 只做浏览，这里先给提示；P4 会把它换成跳转到播放页
-  /// （`MovieVideoPlaybackArgs` + VideoPageController 分派）。
+  /// 把这条线路**可播的剧集**一起带过去：播放页要用它构造 Road（换集、自动
+  /// 连播、选集高亮都在那边做），只传一个 URL 的话换集就没有依据了。
+  ///
+  /// 为什么滤掉不可播的集：它们只是源站给的网页中转地址（如电影天堂的
+  /// `/share/xxx`），播放器打不开。详情页的选集列表已经把它们显示为禁用，
+  /// 那是给用户看的；但**不能塞进播放页** —— 否则自动连播会跳到上面，
+  /// 播放器拿到一个 HTML 地址必然报错。播放页的选集列表只列能播的。
   void _play(MovieEpisode episode) {
-    KazumiDialog.showToast(
-      message: '播放功能将在下一步接入：${episode.title}',
-      context: context,
+    final route = _currentRoute;
+    final detail = _detail;
+    if (route == null || detail == null) return;
+
+    if (!episode.playable) {
+      KazumiDialog.showToast(
+        message: '这一集是网页中转地址，播放器打不开，换一条线路试试。',
+        context: context,
+      );
+      return;
+    }
+
+    final playable = [
+      for (final e in route.episodes)
+        if (e.playable) e,
+    ];
+    if (playable.isEmpty) {
+      KazumiDialog.showToast(
+        message: '这条线路没有可直接播放的剧集，换一条试试。',
+        context: context,
+      );
+      return;
+    }
+
+    final index = playable.indexOf(episode);
+    context.pushNamed(
+      '/video/',
+      arguments: MovieVideoPlaybackArgs(
+        movieName: detail.name,
+        sourceName: widget.item.sourceName,
+        routeName: route.name,
+        episodes: playable,
+        startIndex: index < 0 ? 0 : index,
+        coverUrl: detail.pic.isNotEmpty ? detail.pic : widget.item.pic,
+        year: detail.year,
+      ),
     );
   }
 

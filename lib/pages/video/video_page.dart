@@ -113,6 +113,8 @@ class _VideoPageState extends State<VideoPage>
   void _initializePlayback() {
     if (videoPageController.isOfflineMode) {
       _initOfflineMode();
+    } else if (videoPageController.isMovieMode) {
+      _initMovieMode();
     } else {
       _initOnlineMode();
     }
@@ -156,6 +158,28 @@ class _VideoPageState extends State<VideoPage>
         videoPageController.selectedEpisode.episode,
         currentRoad: videoPageController.selectedEpisode.road,
         offset: videoPageController.historyOffset,
+      );
+    });
+  }
+
+  /// 影视模式。
+  ///
+  /// 相比番剧在线，这里三件事都不做，因为都没有依据可依：
+  /// 没有 Bangumi 元数据可查、没有插件规则要跑（地址就是直链）、
+  /// 也没有历史续播（影视的历史是后续阶段的事）。
+  /// 所以只把当前选集亮出来，然后开播。
+  void _initMovieMode() {
+    videoPageController.historyOffset = 0;
+    _revealCurrentEpisode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) {
+        return;
+      }
+      changeEpisode(
+        videoPageController.selectedEpisode.episode,
+        currentRoad: videoPageController.selectedEpisode.road,
+        offset: 0,
       );
     });
   }
@@ -538,6 +562,17 @@ class _VideoPageState extends State<VideoPage>
 
   Widget get tabBody {
     final colors = Theme.of(context).colorScheme;
+
+    // 影视只给「选集」，不给「评论」。
+    //
+    // 那个「评论」是 Bangumi 分集讨论，靠 Bangumi 的剧集 id 去查 —— 影视片
+    // 在 Bangumi 里没有对应条目，这个 tab 必然是「评论暂时未能加载」。
+    // 与其摆一个注定报错的 tab，不如不给。片子简介在详情页已经有了，
+    // 播放器侧栏里不必重复一遍。
+    if (videoPageController.isMovieMode) {
+      return ColoredBox(color: colors.surface, child: episodePanel);
+    }
+
     final int episodeNum = videoPageController.commentsEpisode;
 
     return ColoredBox(
