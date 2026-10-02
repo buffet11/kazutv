@@ -49,7 +49,13 @@ class _NetworkMirrorSettingsState extends State<NetworkMirrorSettings> {
             current: bangumiAcceleration,
             modes: BangumiAcceleration.values,
             label: (mode) => mode.label,
-            description: (mode) => mode.description,
+            // 本构建没有镜像签名凭据时，镜像对搜索与评论必然 401，会被自动
+            // 升级成 ECH（见 BangumiAcceleration.current）。这里把它说清楚，
+            // 免得用户选了「镜像」却发现实际显示「ECH」而困惑。
+            description: (mode) => mode == BangumiAcceleration.mirror &&
+                    !BangumiAcceleration.hasMirrorCredentials
+                ? '镜像接口（本构建无签名凭据，会自动改用加密握手）'
+                : mode.description,
             setting: SettingsKeys.bangumiAcceleration,
           ),
         ),

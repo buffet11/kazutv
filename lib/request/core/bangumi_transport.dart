@@ -26,6 +26,8 @@ class BangumiAccelerationInterceptor extends Interceptor {
           options.queryParameters = {};
           options.extra[_echRequestKey] = true;
         case BangumiAcceleration.mirror:
+          // 走到这里说明镜像可用（`current` 已经把「无凭据的镜像」升级成 ECH，
+          // 见 bangumi_acceleration.dart），所以不需要再判断签名能力。
           options.path =
               ApiEndpoints.bangumiMirrorDomain +
               uri.path +

@@ -109,15 +109,11 @@ class BangumiClient {
         !ApiEndpoints.bangumiPublicApiHosts.contains(uri.host)) {
       return false;
     }
-    final path = uri.path;
-    if (method == 'POST' && path == '/v0/search/subjects') {
-      return true;
-    }
-    if (method != 'GET') {
+    // 没有凭据就签不出有效签名。此时既不加签名头（加了也是错的），
+    // 拦截器那边也会让这类请求绕开镜像 —— 两处都看同一个判定。
+    if (!BangumiAcceleration.hasMirrorCredentials) {
       return false;
     }
-    return path.startsWith('/p1/subjects/') && path.endsWith('/comments') ||
-        path.startsWith('/p1/episodes/') && path.endsWith('/comments') ||
-        path.startsWith('/p1/characters/') && path.endsWith('/comments');
+    return BangumiAcceleration.needsMirrorSignature(method, uri.path);
   }
 }
