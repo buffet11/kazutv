@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:math';
 import 'package:kazutv/request/apis/bangumi_api.dart';
 import 'package:kazutv/modules/bangumi/bangumi_item.dart';
 import 'package:kazutv/services/network/bangumi_acceleration.dart';
+import 'package:kazutv/services/network/bangumi_acceleration_healer.dart';
 import 'package:mobx/mobx.dart';
 
 part 'popular_controller.g.dart';
@@ -66,6 +68,10 @@ abstract class _PopularController with Store {
     trendList.addAll(result.where((item) => existingIds.add(item.id)));
     isLoadingMore = false;
     isTimeOut = trendList.isEmpty;
+    // 空了不一定是真没内容，也可能是加速模式在本机不通 —— 后台换模式试一遍。
+    if (isTimeOut) {
+      unawaited(BangumiAccelerationHealer.heal());
+    }
   }
 
   @action
@@ -87,5 +93,8 @@ abstract class _PopularController with Store {
     bangumiList.addAll(result);
     isLoadingMore = false;
     isTimeOut = bangumiList.isEmpty;
+    if (isTimeOut) {
+      unawaited(BangumiAccelerationHealer.heal());
+    }
   }
 }

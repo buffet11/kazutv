@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:kazutv/modules/bangumi/bangumi_item.dart';
 import 'package:kazutv/request/apis/bangumi_api.dart';
 import 'package:kazutv/utils/anime_season.dart';
 import 'package:kazutv/repositories/collect_repository.dart';
 import 'package:kazutv/modules/collect/collect_type.dart';
 import 'package:kazutv/services/network/bangumi_acceleration.dart';
+import 'package:kazutv/services/network/bangumi_acceleration_healer.dart';
 import 'package:kazutv/services/logging/logger.dart';
 import 'package:mobx/mobx.dart';
 
@@ -71,6 +74,10 @@ abstract class _TimelineController with Store {
           error: error, stackTrace: stackTrace);
     } finally {
       isLoading = false;
+    }
+    // 同一个坑的另一处入口：加载失败往往不是"这季没番"，而是加速模式不通。
+    if (isTimeOut) {
+      unawaited(BangumiAccelerationHealer.heal());
     }
   }
 

@@ -79,7 +79,8 @@ class _SearchPageState extends State<SearchPage> {
     _inputFocus.unfocus();
     _writeInput(query);
     setState(() => _submittedQuery = query);
-    final request = _controller.searchBangumi(query, type: 'init');
+    // 走带自愈的入口：失败时后台换一种加速模式并自动替用户重试一次
+    final request = _controller.searchWithRecovery(query);
     if (_scroll.hasClients) _scroll.jumpTo(0);
     await request;
   }
@@ -317,10 +318,9 @@ class _SearchPageState extends State<SearchPage> {
             // 否则「请求失败」会被当成「没有这部番」。
             // 复用推荐/时间表那个组件 —— 它已经带了「加速设置」入口，
             // 并且会显示当前用的是哪种加速方式。
-            onRetry: () =>
-                _controller.searchBangumi(_submittedQuery!, type: 'init'),
+            onRetry: () => _controller.searchWithRecovery(_submittedQuery!),
             onSettingsReturned: () =>
-                _controller.searchBangumi(_submittedQuery!, type: 'init'),
+                _controller.searchWithRecovery(_submittedQuery!),
           ),
         )
       else if (allItems.isEmpty)

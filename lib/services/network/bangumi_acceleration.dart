@@ -16,7 +16,7 @@ enum BangumiAcceleration {
     _ => GStorage.getSetting(SettingsKeys.enableBangumiProxy) ? mirror : direct,
   };
 
-  /// **实际使用**的模式。
+  /// 不考虑自愈覆盖时的**有效**模式。
   ///
   /// ⚠️ 镜像不能用于「没有签名凭据」的构建：搜索与评论要求 `X-Signature`，
   /// 而签名密钥来自上游 CI（本地构建是空串），一到签名那关就 401。
@@ -29,8 +29,41 @@ enum BangumiAcceleration {
   ///
   /// 为什么是 ECH 而不是直连：ECH 本就是为「直连不通」的网络准备的。
   /// 实测中直连 api.bgm.tv 会长时间转圈最终失败，而 ECH 可通。
-  static BangumiAcceleration get current =>
+  static BangumiAcceleration get effective =>
       requested == mirror && !hasMirrorCredentials ? ech : requested;
+
+  /// 自愈/探测期间临时覆盖的模式（**仅内存，不写设置**）。
+  ///
+  /// 为什么不直接改设置：探测是"试试看"，试错过程不该反复落盘，更不该在中途
+  /// 把用户原本的选择改坏 —— 只有确认能通的那一个才会写回去。
+  static BangumiAcceleration? _override;
+
+  /// **实际使用**的模式（见 [effective] 与 [_override]）。
+  static BangumiAcceleration get current => _override ?? effective;
+
+  /// 在指定模式下执行一段代码。自愈探测用。
+  static Future<T> withMode<T>(
+    BangumiAcceleration mode,
+    Future<T> Function() body,
+  ) async {
+    final previous = _override;
+    _override = mode;
+    try {
+      return await body();
+    } finally {
+      _override = previous;
+    }
+  }
+
+  /// 自愈时的候选顺序。
+  ///
+  /// ECH 优先：它本就是为「直连不通」的网络准备的，实测在直连长时间超时的
+  /// 环境下可用。镜像垫底，而且只在有签名凭据时才算候选（见
+  /// [hasMirrorCredentials]）。
+  static List<BangumiAcceleration> get candidates => [
+    for (final mode in const [ech, direct, mirror])
+      if (mode.usable) mode,
+  ];
 
   /// 镜像的「受保护请求」是否可用。
   ///

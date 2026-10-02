@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:mobx/mobx.dart';
@@ -9,6 +10,7 @@ import 'package:kazutv/repositories/collect_repository.dart';
 import 'package:kazutv/repositories/search_history_repository.dart';
 import 'package:kazutv/request/apis/bangumi_api.dart';
 import 'package:kazutv/request/apis/trace_api.dart';
+import 'package:kazutv/services/network/bangumi_acceleration_healer.dart';
 import 'package:kazutv/utils/search_parser.dart';
 
 part 'search_controller.g.dart';
@@ -137,6 +139,25 @@ abstract class _SearchPageController with Store {
     // 用户会以为这部片子不存在，而其实只是请求被拒了。
     // 2026-10-02 的番剧搜索回归（镜像签名缺凭据 -> 401）就是被这个掩盖掉的。
     isTimeOut = pagesFetched == 0;
+    // 失败了不一定真是"没有这片"，也可能是加速模式在本机不通。
+    // 让自愈在后台换模式试一遍，成功的话设置会被改好，重试即可。
+    if (isTimeOut) {
+      unawaited(BangumiAccelerationHealer.heal());
+    }
+  }
+
+  /// 搜索 + 失败自愈。
+  ///
+  /// 单独包一层而不是改 `searchBangumi`：后者是 `@action`，签名一动
+  /// `search_controller.g.dart` 里生成的 override 就对不上了，而本机跑不了
+  /// build_runner（见 git 历史的 tools 那条）。
+  Future<void> searchWithRecovery(String input, {String type = 'init'}) async {
+    await searchBangumi(input, type: type);
+    if (!isTimeOut) return;
+    // 自愈成功就直接替用户重试一次 —— 用户不需要知道刚才换过模式。
+    if (await BangumiAccelerationHealer.heal()) {
+      await searchBangumi(input, type: type);
+    }
   }
 
   @action
