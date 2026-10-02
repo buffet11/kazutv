@@ -8,6 +8,8 @@ import 'package:kazutv/pages/player/player_controller.dart';
 import 'package:kazutv/modules/bangumi/bangumi_item.dart';
 import 'package:kazutv/modules/download/download_module.dart';
 import 'package:kazutv/modules/history/history_module.dart';
+import 'package:kazutv/modules/movie/movie_history.dart';
+import 'package:kazutv/services/movie/movie_history_service.dart';
 import 'package:kazutv/repositories/download_repository.dart';
 import 'package:kazutv/services/download/download_manager.dart';
 import 'package:kazutv/services/video_source/services.dart';
@@ -135,6 +137,15 @@ abstract class _VideoPageController with Store implements Disposable {
   /// 仅在 [isMovieMode] 为真时可读。
   MovieVideoPlaybackArgs get movieArgs => _movieArgs!;
 
+  /// 影视进度的落盘节流：位置回调约每秒一次，10 秒写一次足够。
+  static const _movieSaveIntervalMs = 10000;
+
+  /// 小于这个秒数不记 —— 起播瞬间位置还是 0，写下去会把已有进度覆盖成 0。
+  static const _movieMinRecordSeconds = 5;
+
+  int _movieLastSavedAtMs = 0;
+  Duration? _movieLastPosition;
+
   PlaybackHistoryIdentity? _playbackHistoryIdentity;
   final Map<int, DownloadEpisode> _offlineEpisodesByNumber = {};
   final Map<int, int> _offlineDisplayRoadToOriginalRoad = {};
@@ -255,6 +266,10 @@ abstract class _VideoPageController with Store implements Disposable {
     src = args.routeName;
     isOfflineMode = false;
     _loading = false;
+
+    // 续播起点。影视没有 Bangumi 历史可查，这个值由详情页从
+    // MovieHistoryService 取出后经参数带进来 —— 播放页不自己去猜。
+    historyOffset = args.startOffsetSeconds;
 
     // 复用 Road：data 放播放地址、identifier 放集名。这样
     // _resolveOnlineEpisode / 剧集切换 / 自动连播 全部现成可用。
@@ -738,6 +753,65 @@ abstract class _VideoPageController with Store implements Disposable {
       _playbackSessions.cancel();
     }
   }
+
+  /// 影视播放进度写入。
+  ///
+  /// 播放器的位置回调大约每秒一次，每次都落盘太频繁 —— 这里自己节流。
+  /// 换集与退出时用 [flushMovieProgress] 强制补一次，所以最多丢十来秒。
+  ///
+  /// 位置太小的不写：起播瞬间位置还是 0，写下去会把之前的进度覆盖成 0。
+  Future<void> saveMovieProgress(
+    Duration position, {
+    Duration duration = Duration.zero,
+    bool force = false,
+  }) async {
+    final args = _movieArgs;
+    if (args == null) return;
+
+    _movieLastPosition = position;
+    if (position.inSeconds < _movieMinRecordSeconds) return;
+
+    final now = DateTime.now().millisecondsSinceEpoch;
+    if (!force && now - _movieLastSavedAtMs < _movieSaveIntervalMs) return;
+    _movieLastSavedAtMs = now;
+
+    final selection = playbackEpisode;
+    final road = selection.road >= 0 && selection.road < roadList.length
+        ? roadList[selection.road]
+        : null;
+    final index = selection.episode - 1;
+    final title = road != null && index >= 0 && index < road.identifier.length
+        ? road.identifier[index]
+        : '';
+
+    await MovieHistoryService.save(
+      MoviePlayProgress(
+        sourceKey: args.sourceKey,
+        vodId: args.vodId,
+        name: args.movieName,
+        coverUrl: args.coverUrl,
+        routeName: args.routeName,
+        episodeIndex: index < 0 ? 0 : index,
+        episodeTitle: title,
+        positionSeconds: position.inSeconds,
+        durationSeconds: duration.inSeconds,
+        updatedAt: now,
+      ),
+    );
+  }
+
+  /// 退出/换集时把最后一次位置补写下去。
+  Future<void> flushMovieProgress({Duration duration = Duration.zero}) {
+    final last = _movieLastPosition;
+    if (last == null) return Future.value();
+    return saveMovieProgress(last, duration: duration, force: true);
+  }
+
+  /// 切换线路/集数后旧线路的位置就没意义了。
+  ///
+  /// 不需要额外处理：换集后播放器位置回到 0，而
+  /// [saveMovieProgress] 对小于 [_movieMinRecordSeconds] 的位置直接不记，
+  /// 所以不会拿一个 0 去覆盖上一个进度。
 
   Future<void> _resolveWithVideoSourceService(
     String url,

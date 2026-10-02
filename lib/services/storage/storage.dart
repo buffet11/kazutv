@@ -33,6 +33,13 @@ class GStorage {
   /// 也就几十条，JSON 完全够用，而且导入导出天然就是 JSON。
   static late Box<String> movieSources;
 
+  /// 影视播放进度，key = `sourceKey:vodId`，value = 记录 JSON。
+  ///
+  /// 同样用 `Box<String>` 绕开代码生成。**刻意不复用番剧的 `histories`** ——
+  /// 那套绑在 BangumiItem 上、还挂着 WebDAV 同步，影视没有 Bangumi id，
+  /// 混进去会污染番剧的「看过」列表和同步数据。
+  static late Box<String> movieHistories;
+
   /// Hive directory path, initialized during init()
   static String? _hivePath;
 
@@ -165,6 +172,7 @@ class GStorage {
     searchHistory = await _openBoxSafe<SearchHistory>('searchHistory');
     downloads = await _openBoxSafe<DownloadRecord>('downloads');
     movieSources = await _openBoxSafe<String>('movieSources');
+    movieHistories = await _openBoxSafe<String>('movieHistories');
   }
 
   /// Open a Hive box with automatic recovery on corruption.

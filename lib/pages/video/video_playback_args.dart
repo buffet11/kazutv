@@ -56,6 +56,8 @@ class OfflineVideoPlaybackArgs extends VideoPlaybackArgs {
 /// 的换集路径（`_changeMovieEpisode`），不碰 WebView。
 class MovieVideoPlaybackArgs extends VideoPlaybackArgs {
   const MovieVideoPlaybackArgs({
+    required this.sourceKey,
+    required this.vodId,
     required this.movieName,
     required this.sourceName,
     required this.routeName,
@@ -63,7 +65,15 @@ class MovieVideoPlaybackArgs extends VideoPlaybackArgs {
     required this.startIndex,
     this.coverUrl = '',
     this.year = '',
+    this.startOffsetSeconds = 0,
   });
+
+  /// 来源源 key —— 与 [vodId] 一起作为播放进度的身份
+  /// （`MoviePlayProgress.keyOf`）。同一个片在不同源里各存一份进度。
+  final String sourceKey;
+
+  /// 源站内的影片 id
+  final String vodId;
 
   /// 片名（画中画标题、播放器面板都用它）
   final String movieName;
@@ -87,6 +97,9 @@ class MovieVideoPlaybackArgs extends VideoPlaybackArgs {
 
   final String coverUrl;
   final String year;
+
+  /// 从第几秒开始播（续播用）。0 表示从头开始。
+  final int startOffsetSeconds;
 
   @override
   String toString() =>

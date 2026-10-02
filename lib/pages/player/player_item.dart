@@ -1163,14 +1163,21 @@ class _PlayerItemState extends State<PlayerItem>
       }
       final historyIdentity = videoPageController.currentHistoryIdentity;
       if (playerController.playback.playerPlaying &&
-          !videoPageController.loading &&
-          historyIdentity != null &&
-          historyIdentity.canRecord) {
-        historyController.updateHistory(
-          historyIdentity,
-          playerController.playback.playerPosition,
-          duration: playerController.playback.playerDuration,
-        );
+          !videoPageController.loading) {
+        if (videoPageController.isMovieMode) {
+          // 影视走自己的进度存储：不绑 BangumiItem，也不进 WebDAV 同步。
+          // 那边没有 identity 可查，所以必须在这里单独分一支。
+          unawaited(videoPageController.saveMovieProgress(
+            playerController.playback.playerPosition,
+            duration: playerController.playback.playerDuration,
+          ));
+        } else if (historyIdentity != null && historyIdentity.canRecord) {
+          historyController.updateHistory(
+            historyIdentity,
+            playerController.playback.playerPosition,
+            duration: playerController.playback.playerDuration,
+          );
+        }
       }
       final playingSelection = videoPageController.playbackEpisode;
       final playingRoadData =

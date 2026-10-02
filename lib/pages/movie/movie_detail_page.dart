@@ -7,12 +7,15 @@ import 'package:kazutv/bean/dialog/dialog_helper.dart';
 import 'package:kazutv/bean/widget/empty_state_widget.dart';
 import 'package:kazutv/bean/widget/loading_indicator.dart';
 import 'package:kazutv/modules/movie/movie_detail.dart';
+import 'package:kazutv/modules/movie/movie_history.dart';
 import 'package:kazutv/modules/movie/movie_item.dart';
 import 'package:kazutv/modules/movie/movie_source.dart';
+import 'package:kazutv/navigation.dart';
 import 'package:kazutv/pages/movie/movie_episode_grid.dart';
 import 'package:kazutv/pages/movie/movie_route_selector.dart';
 import 'package:kazutv/pages/video/video_playback_args.dart';
 import 'package:kazutv/request/apis/apple_cms_api.dart';
+import 'package:kazutv/services/movie/movie_history_service.dart';
 import 'package:kazutv/services/movie/movie_source_manager.dart';
 
 /// 影视详情页。
@@ -29,13 +32,43 @@ class MovieDetailPage extends StatefulWidget {
   State<MovieDetailPage> createState() => _MovieDetailPageState();
 }
 
-class _MovieDetailPageState extends State<MovieDetailPage> {
+class _MovieDetailPageState extends State<MovieDetailPage> with RouteAware {
   MovieDetail? _detail;
   bool _loading = true;
   String? _error;
 
   /// 当前选中的线路（在 `playableRoutes` 里的下标）
   int _routeIndex = 0;
+
+  /// 播放进度**每次读实时数据**而不是缓存一份。
+  ///
+  /// 缓存的话，从播放页返回后 banner 还显示着进去之前的旧时间 —— 看着就像坏了。
+  /// 后面用 [didPopNext] 补一次 rebuild 就够了。Hive 的读是内存操作，很便宜。
+  MoviePlayProgress? get _progress => MovieHistoryService.find(
+        widget.item.sourceKey,
+        widget.item.vodId,
+      );
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = ModalRoute.of(context);
+    if (route is PageRoute<void>) {
+      rootRouteObserver.subscribe(this, route);
+    }
+  }
+
+  @override
+  void dispose() {
+    rootRouteObserver.unsubscribe(this);
+    super.dispose();
+  }
+
+  /// 从播放页返回时刷新一下，让「继续观看」显示的是刚看到的位置。
+  @override
+  void didPopNext() {
+    if (mounted) setState(() {});
+  }
 
   MovieSource? get _source {
     for (final s in MovieSourceManager.all()) {
@@ -91,6 +124,44 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
     return routes[_routeIndex.clamp(0, routes.length - 1)];
   }
 
+  /// 上次看到的位置，前提是它还能对得上**现在的**线路结构。
+  ///
+  /// 源站的线路名会变、某条线路可能下架，所以记录里的 `routeName` /
+  /// `episodeIndex` 有可能对不上。对不上就返回 null（不显示「继续观看」），
+  /// 而不是硬套一个位置上去 —— 那会让人一打开就跳到莫名其妙的地方。
+  ({MovieRoute route, int routeIndex, int episodeIndex})? get _resumeTarget {
+    final progress = _progress;
+    if (progress == null || !progress.resumable) return null;
+
+    final routes = _routes;
+    if (routes.isEmpty) return null;
+
+    var routeIndex = routes.indexWhere((r) => r.name == progress.routeName);
+    if (routeIndex < 0) routeIndex = 0; // 线路名对不上就退回第一条可播线路
+    final route = routes[routeIndex];
+
+    final playable = [for (final e in route.episodes) if (e.playable) e];
+    final index = progress.episodeIndex;
+    if (index < 0 || index >= playable.length) return null;
+
+    return (route: route, routeIndex: routeIndex, episodeIndex: index);
+  }
+
+  /// 从上次的位置接着看。
+  void _resume() {
+    final target = _resumeTarget;
+    final progress = _progress;
+    if (target == null || progress == null) return;
+
+    setState(() => _routeIndex = target.routeIndex);
+    final playable = [
+      for (final e in target.route.episodes)
+        if (e.playable) e,
+    ];
+    _play(playable[target.episodeIndex],
+        offsetSeconds: progress.positionSeconds);
+  }
+
   /// 播放某一集。
   ///
   /// 把这条线路**可播的剧集**一起带过去：播放页要用它构造 Road（换集、自动
@@ -100,7 +171,8 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   /// `/share/xxx`），播放器打不开。详情页的选集列表已经把它们显示为禁用，
   /// 那是给用户看的；但**不能塞进播放页** —— 否则自动连播会跳到上面，
   /// 播放器拿到一个 HTML 地址必然报错。播放页的选集列表只列能播的。
-  void _play(MovieEpisode episode) {
+  /// [offsetSeconds] > 0 表示续播（从上次的位置接着看）。
+  void _play(MovieEpisode episode, {int offsetSeconds = 0}) {
     final route = _currentRoute;
     final detail = _detail;
     if (route == null || detail == null) return;
@@ -129,6 +201,8 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
     context.pushNamed(
       '/video/',
       arguments: MovieVideoPlaybackArgs(
+        sourceKey: widget.item.sourceKey,
+        vodId: widget.item.vodId,
         movieName: detail.name,
         sourceName: widget.item.sourceName,
         routeName: route.name,
@@ -136,6 +210,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
         startIndex: index < 0 ? 0 : index,
         coverUrl: detail.pic.isNotEmpty ? detail.pic : widget.item.pic,
         year: detail.year,
+        startOffsetSeconds: offsetSeconds,
       ),
     );
   }
@@ -188,6 +263,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _header(context, detail),
+          if (_resumeTarget != null) _resumeBanner(context),
           const SizedBox(height: 12),
           _routesSection(context, detail),
           const Divider(height: 24, indent: 16, endIndent: 16),
@@ -275,6 +351,80 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  /// 「继续观看」入口。
+  ///
+  /// 做成独立一条而不是把主按钮改成「继续观看」：用户可能就是想从头再看，
+  /// 主按钮得保持「从头播」的确定含义，续播是个额外的、可选的入口。
+  Widget _resumeBanner(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+    final progress = _progress!;
+    final target = _resumeTarget!;
+
+    final playable = [
+      for (final e in target.route.episodes)
+        if (e.playable) e,
+    ];
+    // 只有一集（电影）就别报「第 1 集」，用集名更自然
+    final episodeLabel = progress.episodeTitle.isNotEmpty
+        ? '${progress.episodeTitle} · '
+        : (playable.length > 1 ? '第 ${target.episodeIndex + 1} 集 · ' : '');
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+      child: Material(
+        color: colors.secondaryContainer,
+        borderRadius: BorderRadius.circular(12),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: _resume,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            child: Row(
+              children: [
+                Icon(Icons.history_rounded,
+                    size: 20, color: colors.onSecondaryContainer),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '继续观看',
+                        style: theme.textTheme.titleSmall?.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: colors.onSecondaryContainer,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        '$episodeLabel看到 ${progress.positionLabel}'
+                        '${progress.remainingLabel.isEmpty ? '' : ' · 剩 ${progress.remainingLabel}'}',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: colors.onSecondaryContainer,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  '${(progress.percent * 100).round()}%',
+                  style: theme.textTheme.labelMedium?.copyWith(
+                    fontWeight: FontWeight.w700,
+                    color: colors.onSecondaryContainer,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

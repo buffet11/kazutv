@@ -169,7 +169,8 @@ class _VideoPageState extends State<VideoPage>
   /// 也没有历史续播（影视的历史是后续阶段的事）。
   /// 所以只把当前选集亮出来，然后开播。
   void _initMovieMode() {
-    videoPageController.historyOffset = 0;
+    // historyOffset 由控制器从播放参数里取好（详情页查的续播位置），
+    // 这里不要清零 —— 清零就等于每次从头开始。
     _revealCurrentEpisode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -179,7 +180,7 @@ class _VideoPageState extends State<VideoPage>
       changeEpisode(
         videoPageController.selectedEpisode.episode,
         currentRoad: videoPageController.selectedEpisode.road,
-        offset: 0,
+        offset: videoPageController.historyOffset,
       );
     });
   }
@@ -229,6 +230,13 @@ class _VideoPageState extends State<VideoPage>
 
   @override
   void dispose() {
+    // 影视进度平时是 10 秒一写，退出前补一次，免得丢最后十来秒。
+    // 番剧不需要：它由 historyController 自己落盘。
+    unawaited(
+      videoPageController.flushMovieProgress(
+        duration: playerController.playback.playerDuration,
+      ),
+    );
     try {
       windowManager.removeListener(this);
     } catch (_) {}
