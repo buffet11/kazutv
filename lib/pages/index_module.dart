@@ -6,6 +6,7 @@ import 'package:kazutv/pages/collect/collect_module.dart';
 import 'package:kazutv/pages/index_page.dart';
 import 'package:kazutv/pages/info/info_module.dart';
 import 'package:kazutv/pages/init_page.dart';
+import 'package:kazutv/pages/movie/movie_module.dart';
 import 'package:kazutv/pages/my/my_module.dart';
 import 'package:kazutv/pages/onboarding/onboarding_page.dart';
 import 'package:kazutv/pages/popular/popular_controller.dart';
@@ -61,6 +62,7 @@ final tabModule = createModule(
             ..module(popularModule)
             ..module(timelineModule)
             ..module(collectModule)
+            ..module(movieModule)
             ..module(myModule);
         },
       );
@@ -102,6 +104,7 @@ final indexModule = createModule(
       )
       ..module(tabModule)
       ..module(videoModule)
+      ..module(movieDetailModule)
       ..route(
         ImageViewer.routePath,
         child: (context, state) {

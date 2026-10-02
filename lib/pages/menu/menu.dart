@@ -157,6 +157,11 @@ class _ScaffoldMenu extends State<ScaffoldMenu> with RouteAware {
             label: '追番',
           ),
           NavigationDestination(
+            selectedIcon: Icon(Icons.movie),
+            icon: Icon(Icons.movie_outlined),
+            label: '影视',
+          ),
+          NavigationDestination(
             selectedIcon: Icon(Icons.settings),
             icon: Icon(Icons.settings),
             label: '我的',
@@ -203,6 +208,11 @@ class _ScaffoldMenu extends State<ScaffoldMenu> with RouteAware {
                   selectedIcon: Icon(Icons.favorite),
                   icon: Icon(Icons.favorite_border),
                   label: Text('追番'),
+                ),
+                NavigationRailDestination(
+                  selectedIcon: Icon(Icons.movie),
+                  icon: Icon(Icons.movie_outlined),
+                  label: Text('影视'),
                 ),
                 NavigationRailDestination(
                   selectedIcon: Icon(Icons.settings),
