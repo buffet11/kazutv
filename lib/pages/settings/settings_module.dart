@@ -11,6 +11,7 @@ import 'package:kazutv/pages/settings/displaymode_settings.dart';
 import 'package:kazutv/pages/settings/download_settings.dart';
 import 'package:kazutv/pages/settings/interface_settings.dart';
 import 'package:kazutv/pages/settings/keyboard_settings.dart';
+import 'package:kazutv/pages/settings/movie/movie_source_settings.dart';
 import 'package:kazutv/pages/settings/player_settings.dart';
 import 'package:kazutv/pages/settings/proxy/proxy_module.dart';
 import 'package:kazutv/pages/settings/renderer_settings.dart';
@@ -47,6 +48,10 @@ final settingsModule = createModule(
           ..route(
             '/update',
             child: (context, state) => const UpdateSettingsPage(),
+          )
+          ..route(
+            '/movie-source',
+            child: (context, state) => const MovieSourceSettingsPage(),
           )
           ..route('/storage',
               child: (context, state) => const StorageSettingsPage())

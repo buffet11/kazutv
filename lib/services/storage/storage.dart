@@ -26,6 +26,12 @@ class GStorage {
   static late final Box<dynamic> _setting;
   static late Box<SearchHistory> searchHistory;
   static late Box<DownloadRecord> downloads;
+  /// 影视源列表，以 JSON 数组字符串存放。
+  ///
+  /// 存 String 而不是 `Box<MovieSource>`：绕开 Hive adapter 的代码生成步骤
+  /// （加强类型 Box 要跑 build_runner 改 hive_registrar.g.dart），源列表本身
+  /// 也就几十条，JSON 完全够用，而且导入导出天然就是 JSON。
+  static late Box<String> movieSources;
 
   /// Hive directory path, initialized during init()
   static String? _hivePath;
@@ -158,6 +164,7 @@ class GStorage {
     shieldList = await _openBoxSafe<String>('shieldList');
     searchHistory = await _openBoxSafe<SearchHistory>('searchHistory');
     downloads = await _openBoxSafe<DownloadRecord>('downloads');
+    movieSources = await _openBoxSafe<String>('movieSources');
   }
 
   /// Open a Hive box with automatic recovery on corruption.

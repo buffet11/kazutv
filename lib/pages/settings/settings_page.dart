@@ -63,6 +63,12 @@ const List<_SettingsGroup> _settingsGroups = [
         path: '/settings/plugin',
       ),
       _SettingsCategory(
+        label: '影视源',
+        description: '影视采集源管理与导入导出',
+        icon: Icons.movie_filter_rounded,
+        path: '/settings/movie-source',
+      ),
+      _SettingsCategory(
         label: '下载设置',
         description: '并发数与弹幕缓存',
         icon: Icons.downloading_rounded,
