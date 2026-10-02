@@ -8,6 +8,7 @@ import 'package:kazutv/bean/appbar/sys_app_bar.dart';
 import 'package:kazutv/bean/card/network_img_layer.dart';
 import 'package:kazutv/bean/dialog/adaptive_bottom_sheet.dart';
 import 'package:kazutv/bean/dialog/material_bottom_sheet.dart';
+import 'package:kazutv/bean/widget/bangumi_mirror_error_widget.dart';
 import 'package:kazutv/bean/widget/loading_indicator.dart';
 import 'package:kazutv/bean/widget/empty_state_widget.dart';
 import 'package:kazutv/bean/widget/state_presentation.dart';
@@ -309,6 +310,19 @@ class _SearchPageState extends State<SearchPage> {
       )),
       if (busy && allItems.isEmpty)
         const SliverToBoxAdapter(child: _SearchLoadingState())
+      else if (allItems.isEmpty && failed)
+        SliverToBoxAdapter(
+          child: BangumiMirrorErrorWidget(
+            // 搜索失败的异常在 BangumiApi 里被吞掉了，界面必须自己说清楚：
+            // 否则「请求失败」会被当成「没有这部番」。
+            // 复用推荐/时间表那个组件 —— 它已经带了「加速设置」入口，
+            // 并且会显示当前用的是哪种加速方式。
+            onRetry: () =>
+                _controller.searchBangumi(_submittedQuery!, type: 'init'),
+            onSettingsReturned: () =>
+                _controller.searchBangumi(_submittedQuery!, type: 'init'),
+          ),
+        )
       else if (allItems.isEmpty)
         const SliverToBoxAdapter(
           child: GeneralEmptyState(

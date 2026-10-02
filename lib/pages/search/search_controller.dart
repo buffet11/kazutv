@@ -127,8 +127,16 @@ abstract class _SearchPageController with Store {
       }
     } while (hasMoreSearchResults && pagesFetched < _maxPagesPerSearch);
     isLoading = false;
-    isTimeOut =
-        bangumiList.isEmpty && (pagesFetched == 0 || !hasMoreSearchResults);
+    // 「请求失败」与「确实没有这部番」必须分开 —— 两者给用户的信息是相反的。
+    //
+    //   - 第一页就拿到 null（`BangumiApi.bangumiSearch` 出错时返回 null）-> 失败
+    //   - 拿到了页、只是内容为空 -> 真的没有
+    //
+    // 原来写的是 `bangumiList.isEmpty && (pagesFetched == 0 || !hasMoreSearchResults)`，
+    // 把两种情况都置成了 true，于是「搜索失败」在界面上被呈现成「没有找到番剧」，
+    // 用户会以为这部片子不存在，而其实只是请求被拒了。
+    // 2026-10-02 的番剧搜索回归（镜像签名缺凭据 -> 401）就是被这个掩盖掉的。
+    isTimeOut = pagesFetched == 0;
   }
 
   @action
